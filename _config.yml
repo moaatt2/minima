@@ -47,7 +47,7 @@ minima:
       user_title: "mckaymaille@gmail.com" 
 
     - platform: code
-      user_url: "https://github.com/moaatt2/test_blog"
+      user_url: "https://github.com/moaatt2/minima"
 
     - platform: rss
       user_url: "/feed.xml"

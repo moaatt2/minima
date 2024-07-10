@@ -34,6 +34,9 @@ header_pages:
 # Set to `true` to show excerpts on the homepage.
 #show_excerpts: false
 
+# If you have a favicon(tab icon) set the filepath for it below
+favicon: /assets/images/icon.png
+
 # Minima specific settings, which are only available from Minima 3.0 onward.
 minima:
   skin: dark
@@ -52,3 +55,4 @@ minima:
     - platform: rss
       user_url: "/feed.xml"
       user_title: "RSS Feed"
+  

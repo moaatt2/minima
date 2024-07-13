@@ -1,0 +1,91 @@
+---
+layout: base
+---
+
+<style type="text/css" media="screen">
+    .container {
+        margin: 0px auto;
+        max-width: 600px;
+    }
+</style>
+
+<div class="container">
+    <h1 class="page-heading">{{ site.contact.title | default: "Talk to me" }}</h1>
+
+    {%- if site.contact.formspree_form_id -%}
+
+        {%- if site.contact.form_message -%}
+            <p>{{ site.contact.form_message }}</p>
+        {%- endif -%}
+
+        <div id="form" class="contact-form">
+            <form accept-charset="UTF-8" method="POST" action="https://formspree.io/f/{{ site.contact.formspree_form_id }}" v-on:submit.prevent="validateBeforeSubmit" ref="contact">
+                <fieldset>
+                    <input type="hidden" name="_subject" value="New contact!" />
+                    <input type="hidden" name="_next" value="{{ site.url }}{{ site.sent_message_url }}" />
+        
+                    <input type="text" name="name" placeholder="Your name" v-validate="'required'" :class="{ 'has-error': errors.has('name') }">
+                    <span v-if="errors.has('name')" v-cloak>${ errors.first('name') }</span>
+        
+                    <input type="text" name="email" placeholder="Your email" v-validate="'required|email'" :class="{ 'has-error': errors.has('email') }">
+                    <span v-if="errors.has('email')" v-cloak>${ errors.first('email') }</span>
+        
+                    <textarea name="message" onkeyup="adjust_textarea(this)" placeholder="Your message" v-validate="'required'" :class="{ 'has-error': errors.has('message') }"></textarea>
+                    <span v-if="errors.has('message')" v-cloak>${ errors.first('message') }</span>
+        
+                    <button type="submit">Send</button>
+                </fieldset>
+            </form>
+        </div>
+
+    {%- else -%}
+        <p>No Formspree Form ID was provided in the config file. To enable a contact from please add a Formspree form id in the formspree_form_id key under the contact key value.</p>
+    {%- endif -%}
+</div>
+
+
+<script type="text/javascript">
+    function adjust_textarea(h) {
+        h.style.height = "200px";
+        h.style.height = (h.scrollHeight)+"px";
+    }
+</script>
+  
+<script src="https://unpkg.com/vue@2.4.2"></script>
+<script src="https://unpkg.com/vee-validate@2.0.0-rc.8"></script>
+<script type="text/javascript">
+    Vue.use(VeeValidate);
+    
+    const dictionary = {
+      'en': {
+        custom: {
+          name: {
+            required: "{{ site.translations.contact.errors.empty_name | default: 'Name is required' }}"
+          },
+          email: {
+            required: "{{ site.translations.contact.errors.empty_email | default: 'Email is required' }}",
+            email: "{{ site.translations.contact.errors.invalid_email | default: 'Email is invalid' }}"
+          },
+          message: {
+            required: "{{ site.translations.contact.errors.empty_message | default: 'Message is required' }}"
+          }
+        }
+      }
+    };
+    
+    VeeValidate.Validator.updateDictionary(dictionary);
+    VeeValidate.Validator.setLocale("en");
+    
+    new Vue({
+      el: '#form',
+      delimiters: ['${', '}'],
+      methods: {
+        validateBeforeSubmit: function () {
+          this.$validator.validateAll();
+          if (!this.errors.any()) {
+            this.$refs.contact.submit();
+          }
+        }
+      }
+    });
+</script>

@@ -30,12 +30,19 @@ plugins:
 # in order as they should show up.
 header_pages:
   - about.md
+  - contact.md
 
 # Set to `true` to show excerpts on the homepage.
 #show_excerpts: false
 
 # If you have a favicon(tab icon) set the filepath for it below
 favicon: /assets/images/icon.png
+
+# Contact Settings
+contact:
+  title: Send me a message
+  formspree_form_id: mckaymaille@gmail.com
+  form_message: You can use this to show a message above your contact form.
 
 # Minima specific settings, which are only available from Minima 3.0 onward.
 minima:

@@ -62,4 +62,10 @@ minima:
     - platform: rss
       user_url: "/feed.xml"
       user_title: "RSS Feed"
-  
+
+# Create tippy abbreviations to use throughout the website
+abbreviations:
+  ar:  "<abbr title='' data-tippy-content='Aspect Ratio'>AR</abbr>"
+  id:  "<abbr title='' data-tippy-content='Inner Diameter'>ID</abbr>"
+  swg: "<abbr title='' data-tippy-content='Standard Wire Gauge'>SWG</abbr>"
+  awg: "<abbr title='' data-tippy-content='American Wire Gauge'>AWG</abbr>"

@@ -34,9 +34,8 @@ layout: base
       {%- endif -%}
 
       <!-- Set Weave Parent -->
-      <!-- TODO: Set to link to parent weave -->
       {%- if page.parent -%}
-        <br> Parent: {{ page.parent }}
+        <br> Parent: <a href="{{ site.baseurl }}{{ page.parent_url }}">{{ page.parent }}</a>
       {%- endif -%}
 
     </p>

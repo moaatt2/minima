@@ -19,7 +19,9 @@ layout: base
 
 <ul>
     {% for family in weave_families %}
-        <li> {{ family }} </li>
+        <li>
+            <a href="#{{ family }}"> {{ family }} </a>
+        </li>
     {% endfor %}
 </ul>
 

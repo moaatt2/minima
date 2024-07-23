@@ -17,18 +17,20 @@ layout: base
 {% assign weave_families = weave_families | split: ", " | uniq | sort %}
 
 
-<ul>
+
+
+<div class="tags">
     {% for family in weave_families %}
-        <li>
-            <a href="#{{ family }}"> {{ family }} </a>
-        </li>
+        <a href="#{{ family }}"> {{ family }} </a>
     {% endfor %}
-</ul>
+</div>
 
 
 {% for family in weave_families %}
-    
-    <h1 id="{{ family }}">{{ family }}</h1>
+
+    <div class="tag-title">
+        <span id="{{ family }}"> {{ family }} </span>
+    </div>
 
     <ul class="post-list">
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}

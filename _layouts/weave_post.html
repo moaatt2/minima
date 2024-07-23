@@ -30,7 +30,7 @@ layout: base
       <!-- Set weave family -->
       <!-- TODO: Set to link to page of weaves in same family -->
       {%- if page.family -%}
-          <br>Family: {{ page.family }}
+            <br>Family: <a href="{{ site.baseurl }}/families#{{ page.family }}"> {{ page.family }} </a>
       {%- endif -%}
 
       <!-- Set Weave Parent -->

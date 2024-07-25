@@ -35,7 +35,11 @@ layout: base
 
       <!-- Set Weave Parent -->
       {%- if page.parent -%}
-        <br> Parent: <a href="{{ site.baseurl }}{{ page.parent_url }}">{{ page.parent }}</a>
+        {% for post in site.posts %}
+          {% if post.title == page.parent %}
+            <br> Parent: <a href="{{ post.url }}"> {{ page.parent }} </a>
+          {% endif %}
+        {% endfor %}
       {%- endif -%}
 
     </p>

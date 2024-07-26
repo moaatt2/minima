@@ -42,6 +42,17 @@ layout: base
         {% endfor %}
       {%- endif -%}
 
+      {% if page.parents %}
+        <br> Parents:
+        {% for parent in page.parents %}
+            {% for post in site.posts%}
+              {% if post.title == parent %}
+              <a href="{{ post.url }}"> {{ parent }}</a>
+              {% endif %}
+            {% endfor %}
+        {% endfor %}
+      {% endif %}
+
     </p>
      
   </header>

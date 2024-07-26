@@ -33,7 +33,7 @@ layout: base
             <br>Family: <a href="{{ site.baseurl }}/families#{{ page.family }}"> {{ page.family }} </a>
       {%- endif -%}
 
-      <!-- Set Weave Parent -->
+      <!-- Set Weave Parent(s) - Single Parent -->
       {%- if page.parent -%}
         {% for post in site.posts %}
           {% if post.title == page.parent %}
@@ -42,6 +42,7 @@ layout: base
         {% endfor %}
       {%- endif -%}
 
+      <!-- Set Weave Parent(s) - Multiple Parent -->
       {% if page.parents %}
         <br> Parents:
         {% for parent in page.parents %}

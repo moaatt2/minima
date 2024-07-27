@@ -11,6 +11,12 @@ layout: base
         {% assign family = post.family | append: ", " %}
         {% assign weave_families = weave_families | append: family %}
     {% endif %}
+    {% if post.families %}
+        {% for f in post.families %}
+            {% assign family = f | append: ", " %}
+            {% assign weave_families = weave_families | append: family %}
+        {% endfor %}
+    {% endif %}
 {% endfor %}
 
 <!-- Split the string into an array, then de-duplicate and sort it -->
@@ -35,7 +41,7 @@ layout: base
     <ul class="post-list">
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         {%- for post in site.posts -%}
-            {% if post.family == family %}
+            {% if post.family == family or post.families contains family %}
                 <li>
                     <span class="post-meta">{{ post.date | date: date_format }}</span>
                     <h3>

@@ -27,10 +27,17 @@ layout: base
         {% endfor %}
       {%- endif -%}
 
-      <!-- Set weave family -->
-      <!-- TODO: Set to link to page of weaves in same family -->
+      <!-- Set Weave Family - Single Family -->
       {%- if page.family -%}
-            <br>Family: <a href="{{ site.baseurl }}/families#{{ page.family }}"> {{ page.family }} </a>
+        <br>Family: <a href="{{ site.baseurl }}/families#{{ page.family }}"> {{ page.family }} </a>
+      {%- endif -%}
+
+      <!-- Set Weave Families - Multiple Families -->
+      {%- if page.families -%}
+        <br> Families:
+        {%- for family in page.families -%}
+          <a href="{{ site.baseurl }}/families#{{ family }}"> {{ family }} </a>
+        {%- endfor -%}
       {%- endif -%}
 
       <!-- Set Weave Parent(s) - Single Parent -->

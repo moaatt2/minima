@@ -29,14 +29,14 @@ layout: base
 
       <!-- Set Weave Family - Single Family -->
       {%- if page.family -%}
-        <br>Family: <a href="{{ site.baseurl }}/families#{{ page.family }}"> {{ page.family }} </a>
+        <br>Family: <a href="{{ site.baseurl }}{{ site.family_page | default: '/families' }}#{{ page.family }}"> {{ page.family }} </a>
       {%- endif -%}
 
       <!-- Set Weave Families - Multiple Families -->
       {%- if page.families -%}
         <br> Families:
         {%- for family in page.families -%}
-          <a href="{{ site.baseurl }}/families#{{ family }}"> {{ family }} </a>
+          <a href="{{ site.baseurl }}{{ site.family_page | default: '/families' }}#{{ family }}"> {{ family }} </a>
         {%- endfor -%}
       {%- endif -%}
 

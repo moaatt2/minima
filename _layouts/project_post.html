@@ -49,7 +49,7 @@ layout: base
             {%- for weave in page.weaves -%}
                 {% for post in site.posts %}
                     {%- if post.title == weave -%}
-                        &nbsp; <a href="{{ post.url }}">{{ weave }}</a>
+                        &nbsp; <a class="article_tag" href="{{ post.url }}">{{ weave }}</a>
                     {%- endif -%}
                 {%- endfor -%}
             {%- endfor -%}

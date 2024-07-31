@@ -2,6 +2,26 @@
 $primaryDark: #469dff;
 $accentDark:  #181818;
 
+.article_tag {
+
+    font-size: 10px;
+    font-weight: 600;
+    color: $primaryDark;
+    display: inline-block;
+    border: 2px solid $primaryDark;
+    border-radius: 20px;
+    padding: 0 10px;
+    margin-right: 2px;
+    margin-bottom: 8px;
+    text-decoration: none;
+
+    &:hover {
+        color: $accentDark;
+        background-color: $primaryDark;
+    }
+
+}
+
 .page-content {
 
     .tags {

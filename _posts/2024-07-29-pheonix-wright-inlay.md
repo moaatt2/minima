@@ -1,5 +1,6 @@
 ---
 layout: project_post
+type: Project
 title:  "Pheonix Wright Inlay"
 date:   2024-07-29
 start_date: 2024-07-13

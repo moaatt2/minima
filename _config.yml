@@ -38,8 +38,9 @@ header_pages:
 # If you have a favicon(tab icon) set the filepath for it below
 favicon: /assets/images/icon.png
 
-# Set the link to the families page if you use it.
+# Set links to grouping pages if you want to use them
 family_page: /families
+type_page: /types
 
 # Contact Settings
 contact:

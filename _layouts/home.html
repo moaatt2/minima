@@ -26,8 +26,19 @@ layout: base
       {%- for post in posts -%}
       <li>
         <span class="post-meta" style="vertical-align: middle;">{{ post.date | date: date_format }}</span>
+        {%- comment -%} Print Type if applicable {%- endcomment -%}
         {%- if post.type and site.type_page -%}
           &nbsp;<a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.type_page }}#{{ post.type }}">{{ post.type }}</a>
+        {%- endif -%}
+        <!-- Print families if applicable -->
+        {%- if post.family and site.family_page -%}
+          &nbsp;|&nbsp;<a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.family_page }}#{{ post.family }}">{{ post.family }}</a>
+        {%- endif -%}
+        {%- if post.families and site.family_page -%}
+          &nbsp;|
+          {%- for family in post.families -%}
+          &nbsp;<a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.family_page }}#{{ family }}">{{ family }}</a>
+          {%- endfor -%}
         {%- endif -%}
         <h3>
           <a class="post-link" href="{{ post.url | relative_url }}">

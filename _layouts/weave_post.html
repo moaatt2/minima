@@ -27,16 +27,20 @@ layout: base
         {% endfor %}
       {%- endif -%}
 
-      <!-- Set Weave Family - Single Family -->
-      {%- if page.family -%}
-        <br>Family:&nbsp;<a class="article_tag" href="{{ site.baseurl }}{{ site.family_page | default: '/families' }}#{{ page.family }}"> {{ page.family }} </a>
-      {%- endif -%}
-
-      <!-- Set Weave Families - Multiple Families -->
+      <!-- Set Weave Families -->
       {%- if page.families -%}
-        <br> Families:
+        {%- if page.families.first and page.families.size > 1 -%}
+          <br>Families:
+        {%- else -%}
+          <br>Family:
+        {%- endif -%}
+
         {%- for family in page.families -%}
-          &nbsp;<a class="article_tag" href="{{ site.baseurl }}{{ site.family_page | default: '/families' }}#{{ family }}"> {{ family }} </a>
+          {%- if site.family_page -%}
+            &nbsp;<a class="article_tag" href="{{ site.baseurl }}{{ site.family_page }}#{{ family }}"> {{ family }} </a>
+          {%- else -%}
+            &nbsp;<span class="article_tag"> {{ family }} </span>
+          {%- endif -%}
         {%- endfor -%}
       {%- endif -%}
 

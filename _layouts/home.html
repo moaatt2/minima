@@ -31,9 +31,6 @@ layout: base
           &nbsp;<a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.type_page }}#{{ post.type }}">{{ post.type }}</a>
         {%- endif -%}
         <!-- Print families if applicable -->
-        {%- if post.family and site.family_page -%}
-          &nbsp;|&nbsp;<a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.family_page }}#{{ post.family }}">{{ post.family }}</a>
-        {%- endif -%}
         {%- if post.families and site.family_page -%}
           &nbsp;|
           {%- for family in post.families -%}

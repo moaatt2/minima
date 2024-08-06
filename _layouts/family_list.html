@@ -7,10 +7,6 @@ layout: base
 
 <!-- Itterate over posts and concatenate weave family values to string -->
 {% for post in site.posts %}
-    {% if post.family %}
-        {% assign family = post.family | append: ", " %}
-        {% assign weave_families = weave_families | append: family %}
-    {% endif %}
     {% if post.families %}
         {% for f in post.families %}
             {% assign family = f | append: ", " %}

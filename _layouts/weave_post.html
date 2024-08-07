@@ -44,24 +44,20 @@ layout: base
         {%- endfor -%}
       {%- endif -%}
 
-      <!-- Set Weave Parent(s) - Single Parent -->
-      {%- if page.parent -%}
-        {%- for post in site.posts -%}
-          {%- if post.title == page.parent -%}
-            <br> Parent:&nbsp;<a class="article_tag" href="{{ post.url }}"> {{ page.parent }} </a>
-          {%- endif -%}
-        {%- endfor -%}
-      {%- endif -%}
+      <!-- Set Weave Parents -->
+      {%- if page.parents -%}
+        {%- if page.parents.first and page.parents.size > 1 -%}
+          <br>Parents:
+        {%- else -%}
+          <br>Parent:
+        {%- endif -%}
 
-      <!-- Set Weave Parent(s) - Multiple Parent -->
-      {% if page.parents -%}
-        <br> Parents:
         {%- for parent in page.parents -%}
-            {%- for post in site.posts -%}
-              {%- if post.title == parent -%}
-                &nbsp;<a class="article_tag" href="{{ post.url }}"> {{ parent }}</a>
-              {%- endif -%}
-            {%- endfor -%}
+          {%- for post in site.posts -%}
+            {%- if post.title == parent -%}
+              &nbsp;<a class="article_tag" href="{{ post.url }}"> {{ parent }} </a>
+            {%- endif -%}
+          {%- endfor -%}
         {%- endfor -%}
       {%- endif -%}
 

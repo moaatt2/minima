@@ -40,7 +40,7 @@ layout: base
 
       <!-- Set Weaves Used -->
       {%- if page.weaves -%}
-            {%- if page.weaves.size > 1-%}
+            {%- if page.weaves.first and page.weaves.size > 1-%}
                 <br> Weaves Used:
             {%- else -%}
                 <br> Weave Used:

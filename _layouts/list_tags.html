@@ -1,0 +1,41 @@
+---
+layout: base
+---
+
+<!-- List tag links to types -->
+<h1>Post Tags</h1>
+
+<div class="tags">
+    {% for tag in site.tags %}
+        <a href="#{{ tag[0] }}"> {{ tag[0] }} </a>
+    {% endfor %}
+</div>
+
+
+<!-- List posts by type -->
+<h1>Tag Lists</h1>
+
+{%- for tag in site.tags -%}
+
+    <div class="tag-title">
+        <span id="{{ tag[0] }}"> {{ tag[0] }} </span>
+    </div>
+
+    <ul class="post-list">
+        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+        {%- for post in tag[1] -%}
+            <li>
+                <span class="post-meta">{{ post.date | date: date_format }}</span>
+                <h3>
+                    <a class="post-link" href="{{ post.url | relative_url }}">
+                        {{ post.title | escape }}
+                    </a>
+                </h3>
+                {%- if site.show_excerpts -%}
+                    {{ post.excerpt }}
+                {%- endif -%}
+            </li>
+        {%- endfor -%}
+    </ul>    
+
+{%- endfor -%}

@@ -9,4 +9,5 @@ weaves:
     - European 4-in-1
     - Japanese 4-in-1
 image_path: "/assets/images/posts/2024_07_29_pheonix_wright_inlay"
+tags: inlay colors ace_attorney
 ---

@@ -28,7 +28,7 @@ layout: base
         <span class="post-meta" style="vertical-align: middle;">{{ post.date | date: date_format }}</span>
         {%- comment -%} Print Type if applicable {%- endcomment -%}
         {%- if post.type and site.type_page -%}
-          &nbsp;|&nbsp;<a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.type_page }}#{{ post.type }}">{{ post.type }}</a>
+          <br><a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.type_page }}#{{ post.type }}">{{ post.type }}</a>
         {%- endif -%}
         <!-- Print families if applicable -->
         {%- if post.families and site.family_page -%}

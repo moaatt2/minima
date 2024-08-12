@@ -26,7 +26,7 @@ layout: base
       {%- for post in posts -%}
       <li>
         <span class="post-meta" style="vertical-align: middle;">{{ post.date | date: date_format }}</span>
-        <!-- Print families if applicable -->
+        {%- comment -%}<!-- Print families if applicable -->{%- endcomment -%}
         {%- if post.families and site.family_page -%}
           &nbsp;|
           {%- for family in post.families -%}

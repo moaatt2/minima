@@ -27,23 +27,6 @@ layout: base
         {% endfor %}
       {%- endif -%}
 
-      <!-- Set Weave Families -->
-      {%- if page.families -%}
-        {%- if page.families.first and page.families.size > 1 -%}
-          <br>Families:
-        {%- else -%}
-          <br>Family:
-        {%- endif -%}
-
-        {%- for family in page.families -%}
-          {%- if site.family_page -%}
-            &nbsp;<a class="article_tag" href="{{ site.baseurl }}{{ site.family_page }}#{{ family }}"> {{ family }} </a>
-          {%- else -%}
-            &nbsp;<span class="article_tag"> {{ family }} </span>
-          {%- endif -%}
-        {%- endfor -%}
-      {%- endif -%}
-
       <!-- Set Weave Parents -->
       {%- if page.parents -%}
         {%- if page.parents.first and page.parents.size > 1 -%}

@@ -38,23 +38,6 @@ layout: base
             {%- endif -%}
       {%- endif -%}
 
-      <!-- Set Weaves Used -->
-      {%- if page.weaves -%}
-            {%- if page.weaves.first and page.weaves.size > 1-%}
-                <br> Weaves Used:
-            {%- else -%}
-                <br> Weave Used:
-            {%- endif -%}
-
-            {%- for weave in page.weaves -%}
-                {% for post in site.posts %}
-                    {%- if post.title == weave -%}
-                        &nbsp;<a class="article_tag" href="{{ post.url }}">{{ weave }}</a>
-                    {%- endif -%}
-                {%- endfor -%}
-            {%- endfor -%}
-      {%- endif -%}
-
     </p>
      
   </header>

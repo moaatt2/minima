@@ -27,23 +27,6 @@ layout: base
         {% endfor %}
       {%- endif -%}
 
-      <!-- Set Weave Parents -->
-      {%- if page.parents -%}
-        {%- if page.parents.first and page.parents.size > 1 -%}
-          <br>Parents:
-        {%- else -%}
-          <br>Parent:
-        {%- endif -%}
-
-        {%- for parent in page.parents -%}
-          {%- for post in site.posts -%}
-            {%- if post.title == parent -%}
-              &nbsp;<a class="article_tag" href="{{ post.url }}"> {{ parent }} </a>
-            {%- endif -%}
-          {%- endfor -%}
-        {%- endfor -%}
-      {%- endif -%}
-
     </p>
      
   </header>

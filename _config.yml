@@ -31,6 +31,8 @@ plugins:
 header_pages:
   - about.md
   - contact.md
+  - families.md
+  - tags.md
 
 # Set to `true` to show excerpts on the homepage.
 #show_excerpts: false

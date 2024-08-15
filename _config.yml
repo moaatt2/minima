@@ -41,8 +41,7 @@ header_pages:
 favicon: /assets/images/icon.png
 
 # Set links to grouping pages if you want to use them
-family_page: /families
-type_page: /types
+tag_page: /tags
 
 # Contact Settings
 contact:

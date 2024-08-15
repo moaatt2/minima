@@ -1,5 +1,5 @@
 ---
 layout: family_list
-title: Families
+title: Posts by Family
 permalink: /families
 ---

@@ -1,6 +1,6 @@
 ---
 layout: list_tags
 permalink: /tags/
-title: Tags
+title: Posts By Tag
 ---
 

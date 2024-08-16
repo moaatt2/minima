@@ -25,6 +25,10 @@ layout: base
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
       {%- for post in posts -%}
       <li>
+        {%- comment -%}<!-- Add image if applicable -->{%- endcomment -%}
+        {%- if post.main_image-%}
+          <img src="{{ site.baseurl }}{{ post.image_path }}{{ post.main_image }}" alt="{{ post.title }} main image"><br>
+        {%- endif -%}
         <span class="post-meta" style="vertical-align: middle;">{{ post.date | date: date_format }}</span>
         {%- comment -%}<!-- Add Tags if applicable -->{%- endcomment -%}
         {%- if post.tags.first and site.tag_page -%}

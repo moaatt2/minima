@@ -29,7 +29,9 @@ layout: base
           {%- comment -%}<!-- Add image if applicable -->{%- endcomment -%}
           {%- if post.main_image-%}
             <div class="picture-box">
-              <img src="{{ site.baseurl }}{{ post.image_path }}{{ post.main_image }}" alt="{{ post.title }} main image"><br>
+              <a href="{{ post.url | relative_url }}">
+                <img src="{{ site.baseurl }}{{ post.image_path }}{{ post.main_image }}" alt="{{ post.title }} main image"><br>
+              </a>
             </div>
           {%- endif -%}
 

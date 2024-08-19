@@ -27,7 +27,7 @@ layout: base
       <li>
         <div class="container">
           {%- comment -%}<!-- Add image if applicable -->{%- endcomment -%}
-          {%- if post.main_image-%}
+          {%- if post.main_image and post.image_path -%}
             <div class="picture-box">
               <a href="{{ post.url | relative_url }}">
                 <img src="{{ site.baseurl }}{{ post.image_path }}{{ post.main_image }}" alt="{{ post.title }} main image"><br>

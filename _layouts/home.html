@@ -24,38 +24,7 @@ layout: base
     <ul class="post-list">
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
       {%- for post in posts -%}
-      <li>
-        <div class="container">
-          {%- comment -%}<!-- Add image if applicable -->{%- endcomment -%}
-          {%- if post.main_image and post.image_path -%}
-            <div class="picture-box">
-              <a href="{{ post.url | relative_url }}">
-                <img src="{{ site.baseurl }}{{ post.image_path }}{{ post.main_image }}" alt="{{ post.title }} main image"><br>
-              </a>
-            </div>
-          {%- endif -%}
-
-          <div class="flex-item">
-            <span class="post-meta" style="vertical-align: middle;">{{ post.date | date: date_format }}</span>
-            {%- comment -%}<!-- Add Tags if applicable -->{%- endcomment -%}
-            {%- if post.tags.first and site.tag_page -%}
-              &nbsp;|
-              {%- for tag in post.tags -%}
-                &nbsp;<a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.tag_page }}#{{ tag }}">{{ tag }}</a>
-              {%- endfor -%}
-            {%- endif -%}
-
-            <h3>
-              <a class="post-link" href="{{ post.url | relative_url }}">
-                {{ post.title | escape }}
-              </a>
-            </h3>
-            {%- if site.show_excerpts -%}
-              {{ post.excerpt }}
-            {%- endif -%}
-          </div>
-        </div>
-      </li>
+        {%- include post_list_item.html post=post -%}      
       {%- endfor -%}
     </ul>
 

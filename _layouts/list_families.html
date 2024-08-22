@@ -30,17 +30,64 @@ layout: base
 
 {% for family in weave_families %}
 
-    <div class="tag-title">
-        <span id="{{ family }}"> {{ family }} </span>
+    <div class="tag-container" id="{{ family }}-container">
+        <div class="tag-title">
+            <span id="{{ family }}"> {{ family }} </span>
+        </div>
+
+        <ul class="post-list">
+            {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+            {%- for post in site.posts -%}
+                {% if post.family == family or post.families contains family %}
+                    {%- include post_list_item.html post=post -%}
+                {% endif %}
+            {%- endfor -%}
+        </ul>
     </div>
 
-    <ul class="post-list">
-        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-        {%- for post in site.posts -%}
-            {% if post.family == family or post.families contains family %}
-                {%- include post_list_item.html post=post -%}
-            {% endif %}
-        {%- endfor -%}
-    </ul>    
-
 {% endfor %}
+
+{%- if page.show_single -%}
+    <script>
+        // Determine if the
+        url_parts = document.URL.split('#');
+        switch (url_parts.length) {
+
+            // No Anchor
+            case 1:
+                console.log('No Anchor');
+
+                // Exiting Case
+                break;
+
+            // 1 Anchor
+            case 2:
+                console.log('Has anchor');
+
+                // Hide the tag list
+                document.querySelector('div.tags').style.display = 'none';
+                console.log('Tag list hidden');
+
+                // Hide all family containers
+                family_containers = document.querySelectorAll('div.tag-container');
+                for (family_container of family_containers) {
+                    family_container.style.display = 'none';
+                }
+                console.log('Hid all family containers');
+                
+                // Find the desired family
+                family = url_parts[1];
+                document.querySelector('div#'+family+'-container').style.display = 'block';
+                console.log('Unhid desired family container');
+
+                // Exiting case
+                break;
+
+                
+            // Anchors > 1
+            default:
+                console.log("Please don't submit  unsafe urls");
+                break;
+        }
+    </script>
+{%- endif -%}

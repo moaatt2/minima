@@ -55,22 +55,21 @@ layout: base
                     item.style.display = "none";
                 }
 
-                // Hide all family containers
-                family_containers = document.querySelectorAll('div.tag-container');
-                for (family_container of family_containers) {
-                    family_container.style.display = 'none';
+                // Hide all containers
+                containers = document.querySelectorAll('div.tag-container');
+                for (container of containers) {
+                    container.style.display = 'none';
                 }
-                console.log('Hid all family containers');
+                console.log('Hid all containers');
                 
-                // Find the desired family
-                family = url_parts[1];
-                document.querySelector('div#'+family+'-container').style.display = 'block';
-                console.log('Unhid desired family container');
+                // Show desired container
+                anchor = url_parts[1];
+                document.querySelector('div#'+anchor+'-container').style.display = 'block';
+                console.log('Show desired container');
 
                 // Exiting case
                 break;
 
-                
             // Anchors > 1
             default:
                 console.log("Please don't submit  unsafe urls");

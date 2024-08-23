@@ -3,9 +3,9 @@ layout: base
 ---
 
 <!-- List tag links to types -->
-<h1>Post Tags</h1>
+<h1 class="hide-in-solo">Post Tags</h1>
 
-<div class="tags">
+<div class="tags hide-in-solo">
     {% for tag in site.tags %}
         <a href="#{{ tag[0] }}"> {{ tag[0] }} </a>
     {% endfor %}
@@ -13,7 +13,7 @@ layout: base
 
 
 <!-- List posts by type -->
-<h1>Tag Lists</h1>
+<h1 class="hide-in-solo">Tag Lists</h1>
 
 {%- for tag in site.tags -%}
 
@@ -49,9 +49,11 @@ layout: base
             case 2:
                 console.log('Has anchor');
 
-                // Hide the tag list
-                document.querySelector('div.tags').style.display = 'none';
-                console.log('Tag list hidden');
+                // Hide all hideable items other than tag containers
+                items_to_hide = document.querySelectorAll(".hide-in-solo");
+                for (item of items_to_hide) {
+                    item.style.display = "none";
+                }
 
                 // Hide all family containers
                 family_containers = document.querySelectorAll('div.tag-container');

@@ -31,9 +31,35 @@ layout: base
 {% for family in weave_families %}
 
     <div class="tag-container" id="{{ family }}-container">
-        <div class="tag-title">
-            <span id="{{ family }}"> {{ family }} </span>
-        </div>
+
+        {%- if page.show_glossary -%}
+
+            <div class="tag-title">
+                <span id="{{ family }}"> {{ family }} </span>
+            </div>
+
+            {%- if site.data.glossary[family].image -%}
+                <figure>
+                    <img src="{{ site.baseurl }}{{ site.data.glossary[family].image }}" width="100">
+                    {%- if site.data.glossary[family].caption -%}
+                        <figcaption>{{ site.data.glossary[family].caption }}</figcaption>
+                    {%- endif -%}
+                </figure>
+            {%- endif -%}
+
+            {%- if site.data.glossary contains family -%}
+                {{ site.data.glossary[family].text }}
+            {%- endif -%}
+
+            <hr>
+
+        {%- else -%}
+
+            <div class="tag-title">
+                <span id="{{ family }}"> {{ family }} </span>
+            </div>
+
+        {%- endif -%}
 
         <ul class="post-list">
             {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}

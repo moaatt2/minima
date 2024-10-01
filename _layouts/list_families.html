@@ -37,7 +37,7 @@ layout: base
         </div>
 
         <div class="glossary-container">
-            {%- assign glossary_writers = "all,show_single" | split: ',' -%}
+            {%- assign glossary_writers = "all,single_only" | split: ',' -%}
             {% if glossary_writers contains page.glossary %}
 
                 {%- if site.data.glossary[family].image -%}
@@ -109,6 +109,41 @@ layout: base
                 
             // Anchors > 1
             default:
+                console.log("Please don't submit  unsafe urls");
+                break;
+        }
+    </script>
+{%- endif -%}
+
+{%- if page.glossary == 'single_only' -%}
+    <script>
+        // Determine the number of anchors in the URL
+        url_parts = document.URL.split('#');
+        switch (url_parts.length) {
+
+            // No Anchor - Hide Glossary
+            case 1:
+                console.log('No Anchor');
+
+                // Hide all glossary containers and exit
+                containers = document.querySelectorAll('div.glossary-container');
+                for (container of containers) {
+                    container.style.display = 'none';
+                }
+                console.log('Hid all glossary containers');
+                break;
+
+
+            // 1 Anchor - Do Nothing
+            case 2:
+                // Log case and exit
+                console.log('Has anchor');
+                break;
+
+
+            // Anchors > 1 - Do Nothing
+            default:
+                // Log case and break
                 console.log("Please don't submit  unsafe urls");
                 break;
         }

@@ -40,7 +40,7 @@ layout: base
             {%- assign glossary_writers = "all,single_only" | split: ',' -%}
             {% if glossary_writers contains page.glossary %}
 
-                {%- if site.data.glossary[family].image -%}
+                {%- if site.data.glossary[family].image and page.glossary_show_images -%}
                     <figure>
                         <img src="{{ site.baseurl }}{{ site.data.glossary[family].image }}" width="100">
                         {%- if site.data.glossary[family].caption -%}

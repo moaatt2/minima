@@ -39,13 +39,10 @@ layout: base
         <div class="glossary-container">
             {%- assign glossary_writers = "all,single_only,all_only" | split: ',' -%}
             {% if glossary_writers contains page.glossary %}
-
                 {%- if site.data.glossary contains family -%}
                     {{ site.data.glossary[family].text }}
+                    <hr>
                 {%- endif -%}
-
-                <hr>
-
             {%- endif -%}
         </div>
 
@@ -63,7 +60,7 @@ layout: base
 
 {%- if page.show_single -%}
     <script>
-        // Determine if the
+        // Determine if the url contains anchors
         url_parts = document.URL.split('#');
         switch (url_parts.length) {
 

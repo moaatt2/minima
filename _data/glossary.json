@@ -12,16 +12,15 @@
     "weave": {
         "image": "/assets/images/posts/2024_05_26_japanese_4_in_1/japanese_4_in_1_flat.jpg",
         "caption": "The Japanese 4-in-1 weave, a very basic weave.",
-        "text": "In the context of chainmail a weave is"
+        "text": "In chainmail a weave is an infinitely repeating pattern and unique of rings, where each ring meaningfully contributes such that removing one ring drastically changes its characteristics."
+    },
+    "chain": {
+        "text": "In chainmail a chain is a weave that is infinitely repeatable in one direction."
     },
     "sheet": {
-        "image": "",
-        "text": ""
+        "text": "In chainmail a sheet is a weave that is infinitely repeatable in two directions that are perpendicular to each other."
     },
     "tutorial": {
-        "text": "These are posts with included tutorials I have written."
-    },
-    "project": {
-        "text": "These are posts for which showcase a project instead of a weave."
+        "text": "Posts with included tutorials."
     }
 }

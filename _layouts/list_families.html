@@ -2,32 +2,45 @@
 layout: base
 ---
 
-<!-- List tag links to types -->
-<h1 class="hide-in-solo">Post Tags</h1>
+<!-- Create empty string-->
+{% assign weave_families = "" %}
 
-<div class="tags hide-in-solo">
-    {% for tag in site.tags %}
-        <a href="#{{ tag[0] }}"> {{ tag[0] }} </a>
+<!-- Itterate over posts and concatenate weave family values to string -->
+{% for post in site.posts %}
+    {% if post.families %}
+        {% for f in post.families %}
+            {% assign family = f | append: ", " %}
+            {% assign weave_families = weave_families | append: family %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+
+<!-- Split the string into an array, then de-duplicate and sort it -->
+{% assign weave_families = weave_families | split: ", " | uniq | sort %}
+
+
+
+
+<div class="tags">
+    {% for family in weave_families %}
+        <a href="#{{ family }}"> {{ family }} </a>
     {% endfor %}
 </div>
 
 
-<!-- List posts by type -->
-<h1 class="hide-in-solo">Tag Lists</h1>
+{% for family in weave_families %}
 
-{%- for tag in site.tags -%}
+    <div class="tag-container" id="{{ family }}-container">
 
-    <div class="tag-container" id="{{ tag[0] }}-container">
         <div class="tag-title">
-            <span id="{{ tag[0] }}"> {{ tag[0] }} </span>
+            <span id="{{ family }}"> {{ family }} </span>
         </div>
 
         <div class="glossary-container">
             {%- assign glossary_writers = "all,single_only,all_only" | split: ',' -%}
             {% if glossary_writers contains page.glossary %}
-                {%- if site.data.glossary contains tag[0] -%}
-                    {%- assign current_tag = tag[0] -%}
-                    {{ site.data.glossary[current_tag].text }}
+                {%- if site.data.glossary contains family -%}
+                    {{ site.data.glossary[family].text }}
                     <hr>
                 {%- endif -%}
             {%- endif -%}
@@ -35,17 +48,19 @@ layout: base
 
         <ul class="post-list">
             {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-            {%- for post in tag[1] -%}
-                {%- include post_list_item.html post=post -%}
+            {%- for post in site.posts -%}
+                {% if post.family == family or post.families contains family %}
+                    {%- include post_list_item.html post=post -%}
+                {% endif %}
             {%- endfor -%}
         </ul>
     </div>
 
-{%- endfor -%}
+{% endfor %}
 
 {%- if page.show_single -%}
     <script>
-        // Determine if the
+        // Determine if the url contains anchors
         url_parts = document.URL.split('#');
         switch (url_parts.length) {
 
@@ -60,27 +75,26 @@ layout: base
             case 2:
                 console.log('Has anchor');
 
-                // Hide all hideable items other than tag containers
-                items_to_hide = document.querySelectorAll(".hide-in-solo");
-                for (item of items_to_hide) {
-                    item.style.display = "none";
-                }
+                // Hide the tag list
+                document.querySelector('div.tags').style.display = 'none';
+                console.log('Tag list hidden');
 
-                // Hide all containers
-                containers = document.querySelectorAll('div.tag-container');
-                for (container of containers) {
-                    container.style.display = 'none';
+                // Hide all family containers
+                family_containers = document.querySelectorAll('div.tag-container');
+                for (family_container of family_containers) {
+                    family_container.style.display = 'none';
                 }
-                console.log('Hid all containers');
+                console.log('Hid all family containers');
                 
-                // Show desired container
-                anchor = url_parts[1];
-                document.querySelector('div#'+anchor+'-container').style.display = 'block';
-                console.log('Show desired container');
+                // Find the desired family
+                family = url_parts[1];
+                document.querySelector('div#'+family+'-container').style.display = 'block';
+                console.log('Unhid desired family container');
 
                 // Exiting case
                 break;
 
+                
             // Anchors > 1
             default:
                 console.log("Please don't submit  unsafe urls");

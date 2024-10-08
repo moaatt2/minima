@@ -1,0 +1,36 @@
+---
+layout: base
+---
+
+
+<!-- Items -->
+<div class="tags">
+    {% for definition in site.data.glossary %}
+        {% if definition[1].glossary_page_show %}
+            <a href="#{{ definition[0 ]}}"> {{ definition[0] | capitalize }} </a>
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+<!-- Definitions -->
+{%- for definition in site.data.glossary -%}
+    {% if definition[1].glossary_page_show %}
+        <div class="tag-title">
+            <span id="{{ definition[0] }}">{{ definition[0] | capitalize }}</span>
+        </div>
+        {%- if definition[1].image -%}
+            <figure>
+                <img src="{{ site.baseurl }}{{ definition[1].image }}" alt="{{ definition[1].caption }}">
+                {%- if definition[1].caption -%}
+                    <figcaption>{{ definition[1].caption }}</figcaption>
+                {%- endif -%}
+            </figure>
+        {%- else -%}
+            <br>
+        {%- endif -%}
+        {{ definition[1].text }}
+        <br>
+        <br>
+    {%- endif -%}
+{%- endfor -%}

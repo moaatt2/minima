@@ -7,7 +7,17 @@ layout: base
 <div class="tags">
     {% for definition in site.data.glossary %}
         {% if definition[1].glossary_page_show %}
-            <a href="#{{ definition[0 ]}}"> {{ definition[0] | capitalize }} </a>
+
+            <!-- Capitalize Name -->
+            {%- assign name = "" -%}
+            {%- assign components = definition[0] | split: " " -%}
+            {%- for component in components -%}
+                {%- assign tmp = component | capitalize -%}
+                {%- assign tmp = tmp | append: " " -%}
+                {%- assign name = name | append: tmp -%}
+            {%- endfor -%}
+
+            <a href="#{{ definition[0] }}"> {{ name }} </a>
         {% endif %}
     {% endfor %}
 </div>
@@ -16,8 +26,19 @@ layout: base
 <!-- Definitions -->
 {%- for definition in site.data.glossary -%}
     {% if definition[1].glossary_page_show %}
+
+
+        <!-- Capitalize Name -->
+        {%- assign name = "" -%}
+        {%- assign components = definition[0] | split: " " -%}
+        {%- for component in components -%}
+            {%- assign tmp = component | capitalize -%}
+            {%- assign tmp = tmp | append: " " -%}
+            {%- assign name = name | append: tmp -%}
+        {%- endfor -%}
+
         <div class="tag-title">
-            <span id="{{ definition[0] }}">{{ definition[0] | capitalize }}</span>
+            <span id="{{ definition[0] }}">{{ name }}</span>
         </div>
         {%- if definition[1].image -%}
             <figure>

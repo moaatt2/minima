@@ -1,0 +1,25 @@
+
+div.glossary-item {
+    display: flex;
+}
+
+div.glossary-image {
+    height: 100%;
+    width:  100%;
+    // padding-right: 1.5rem;
+
+    // Ensure that the figure caption does not go past the image
+    figure {
+        display: table;
+    }
+    figcaption {
+        display: table-caption;
+        caption-side: bottom;
+        text-align: center;
+    }
+}
+
+div.glossary-definiton {
+    flex-grow: 1;
+    align-content: center;
+}

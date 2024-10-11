@@ -40,20 +40,26 @@ layout: base
                 <span id="{{ definition[0] }}">{{ name }}</span>
             </div>
 
-            {%- if definition[1].image -%}
-                <figure>
-                    <img src="{{ site.baseurl }}{{ definition[1].image }}" alt="{{ definition[1].caption }}">
-                    {%- if definition[1].caption -%}
-                        <figcaption>{{ definition[1].caption }}</figcaption>
-                    {%- endif -%}
-                </figure>
-            {%- else -%}
-                <br>
-            {%- endif -%}
-            
-            {{ definition[1].text }}
-            <br>
-            <br>
+
+            <div class="glossary-item">
+                {%- if definition[1].image -%}
+                    <div class="glossary-image">
+                        <figure>
+                            <img src="{{ site.baseurl }}{{ definition[1].image }}" alt="{{ definition[1].caption }}" width="{{ definition[1].width }}" height="{{ definition[1].height }}">
+                            {%- if definition[1].caption -%}
+                                <figcaption>{{ definition[1].caption }}</figcaption>
+                            {%- endif -%}
+                        </figure>
+                    </div>
+                {%- else -%}
+                    <br>
+                {%- endif -%}
+
+
+                <div class="glossary-definiton">
+                    <span>{{ definition[1].text }}</span>
+                </div>
+            </div>
         </div>
     {%- endif -%}
 {%- endfor -%}

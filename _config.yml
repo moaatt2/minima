@@ -42,6 +42,8 @@ favicon: /assets/images/icon.png
 
 # Set links to grouping pages if you want to use them
 tag_page: /tags
+family_page: /families
+glossary_page: /glossary
 
 # Contact Settings
 contact:

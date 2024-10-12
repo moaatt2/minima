@@ -28,7 +28,7 @@
     "tutorial": {
         "text": "Posts with included tutorials."
     },
-    "aspect ratio": {
+    "aspect_ratio": {
         "text": "The Aspect Ratio(AR) of is how large a ring is(relative to its wire thickness) with a larger AR meaning a larger ring. It is calculated as Inner Diameter/Wire Diameter.",
         "glossary_page_show": true
     }

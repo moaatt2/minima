@@ -10,7 +10,7 @@ layout: base
 
             <!-- Capitalize Name -->
             {%- assign name = "" -%}
-            {%- assign components = definition[0] | split: " " -%}
+            {%- assign components = definition[0] | split: "_" -%}
             {%- for component in components -%}
                 {%- assign tmp = component | capitalize -%}
                 {%- assign tmp = tmp | append: " " -%}
@@ -29,7 +29,7 @@ layout: base
         <div id="{{ definition[0] }}-container"" class="tag-container">
             <!-- Capitalize Name -->
             {%- assign name = "" -%}
-            {%- assign components = definition[0] | split: " " -%}
+            {%- assign components = definition[0] | split: "_" -%}
             {%- for component in components -%}
                 {%- assign tmp = component | capitalize -%}
                 {%- assign tmp = tmp | append: " " -%}

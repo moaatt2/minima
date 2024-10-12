@@ -31,5 +31,21 @@
     "aspect_ratio": {
         "text": "The Aspect Ratio(AR) of is how large a ring is(relative to its wire thickness) with a larger AR meaning a larger ring. It is calculated as Inner Diameter/Wire Diameter.",
         "glossary_page_show": true
+    },
+    "inner_diameter": {
+        "text": "The Inner Diameter(ID) of a ring is the diameter of the circle formed by the inside edge of a ring.",
+        "glossary_page_show": true
+    },
+    "wire_diameter": {
+        "text": "The Wire Diameter(WD) of a ring is the distance from the inner edge of the ring to the closest point on the outer edge of the ring.",
+        "glossary_page_show": true
+    },
+    "standard_wire_gauge": {
+        "text": "Standard Wire Gauge(sWG) is a wire guage system that assigns a number to a specified thickness (Wire Diameter) of wire with a thicker wire having a smaller gauge. You can read more about it <a href=\"https://en.wikipedia.org/wiki/Standard_wire_gauge\">here</a>.",
+        "glossary_page_show": true
+    },
+    "american_wire_gauge": {
+        "text": "American Wire Gauge(AWG) is a wire guage system that assigns a number to a specified thickness (Wire Diameter) of wire with a thicker wire having a smaller gauge. You can read more about it <a href=\"https://en.wikipedia.org/wiki/American_wire_gauge\">here</a>.",
+        "glossary_page_show": true
     }
 }

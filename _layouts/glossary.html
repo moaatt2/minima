@@ -5,7 +5,8 @@ layout: base
 
 <!-- Items -->
 <div class="tags hide-in-solo">
-    {% for definition in site.data.glossary %}
+    {% assign sorted_definitions = site.data.glossary | sort %}
+    {% for definition in sorted_definitions %}
         {% if definition[1].glossary_page_show %}
 
             <!-- Capitalize Name -->
@@ -24,7 +25,8 @@ layout: base
 
 
 <!-- Definitions -->
-{%- for definition in site.data.glossary -%}
+{% assign sorted_definitions = site.data.glossary | sort %}
+{%- for definition in sorted_definitions -%}
     {% if definition[1].glossary_page_show %}
         <div id="{{ definition[0] }}-container"" class="tag-container">
             <!-- Capitalize Name -->

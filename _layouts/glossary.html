@@ -1,0 +1,114 @@
+---
+layout: base
+---
+
+
+<!-- Items -->
+<div class="tags hide-in-solo">
+    {% assign sorted_definitions = site.data.glossary | sort %}
+    {% for definition in sorted_definitions %}
+        {% if definition[1].glossary_page_show %}
+
+            <!-- Capitalize Name -->
+            {%- assign name = "" -%}
+            {%- assign components = definition[0] | split: "_" -%}
+            {%- for component in components -%}
+                {%- assign tmp = component | capitalize -%}
+                {%- assign tmp = tmp | append: " " -%}
+                {%- assign name = name | append: tmp -%}
+            {%- endfor -%}
+
+            <a href="#{{ definition[0] }}"> {{ name }} </a>
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+<!-- Definitions -->
+{% assign sorted_definitions = site.data.glossary | sort %}
+{%- for definition in sorted_definitions -%}
+    {% if definition[1].glossary_page_show %}
+        <div id="{{ definition[0] }}-container"" class="tag-container">
+            <!-- Capitalize Name -->
+            {%- assign name = "" -%}
+            {%- assign components = definition[0] | split: "_" -%}
+            {%- for component in components -%}
+                {%- assign tmp = component | capitalize -%}
+                {%- assign tmp = tmp | append: " " -%}
+                {%- assign name = name | append: tmp -%}
+            {%- endfor -%}
+
+            <div class="tag-title">
+                <span id="{{ definition[0] }}">{{ name }}</span>
+            </div>
+
+
+            <div class="glossary-item">
+                {%- if definition[1].image -%}
+                    <div class="glossary-image">
+                        <figure>
+                            <img src="{{ site.baseurl }}{{ definition[1].image }}" alt="{{ definition[1].caption }}" width="{{ definition[1].width }}" height="{{ definition[1].height }}">
+                            {%- if definition[1].caption -%}
+                                <figcaption>{{ definition[1].caption }}</figcaption>
+                            {%- endif -%}
+                        </figure>
+                    </div>
+                {%- else -%}
+                    <br>
+                {%- endif -%}
+
+
+                <div class="glossary-definiton">
+                    <span>{{ definition[1].text }}</span>
+                </div>
+            </div>
+        </div>
+    {%- endif -%}
+{%- endfor -%}
+
+
+{%- if page.show_single -%}
+    <script>
+        // Determine how many anchors are in the url
+        url_parts = document.URL.split('#');
+        switch (url_parts.length) {
+
+            // No Anchor
+            case 1:
+                // Log and exit case
+                console.log('No Anchor');
+                break;
+
+            // 1 Anchor
+            case 2:
+                console.log('Has anchor');
+
+                // Hide all hideable items other than tag containers
+                items_to_hide = document.querySelectorAll(".hide-in-solo");
+                for (item of items_to_hide) {
+                    item.style.display = "none";
+                }
+
+                // Hide all containers
+                containers = document.querySelectorAll('div.tag-container');
+                for (container of containers) {
+                    container.style.display = 'none';
+                }
+                console.log('Hid all containers');
+                
+                // Show desired container
+                anchor = url_parts[1];
+                document.querySelector('div#'+anchor+'-container').style.display = 'block';
+                console.log('Show desired container');
+
+                // Exiting case
+                break;
+
+            // Anchors > 1
+            default:
+                console.log("Please don't submit  unsafe urls");
+                break;
+        }
+    </script>
+{%- endif -%}
+

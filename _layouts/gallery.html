@@ -1,3 +1,17 @@
 ---
 layout: base
 ---
+
+{% for post in site.posts %}
+    {%- if post.image_path -%}
+        {{post.title}}
+        <br>
+        <ul>
+            {%- for file in site.static_files -%}
+                {%- if file.path contains post.image_path -%}
+                <li>{{ file.path }}</li>
+                {%- endif -%}
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{% endfor %}

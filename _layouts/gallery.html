@@ -9,7 +9,9 @@ layout: base
         <ul>
             {%- for file in site.static_files -%}
                 {%- if file.path contains post.image_path -%}
-                <li>{{ file.path }}</li>
+                    {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
+                        <li>{{ file.path }}</li>
+                    {%- endunless -%}
                 {%- endif -%}
             {%- endfor -%}
         </ul>

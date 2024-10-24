@@ -17,16 +17,25 @@ layout: base
 
         <!-- List images for post if there is at least 1 image -->
         {%- if num_images > 1 -%}
-            {{post.title}}
-            <ul>
-                {%- for file in site.static_files -%}
-                    {%- if file.path contains post.image_path -%}
-                        {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
-                            <li>{{ file.path }}</li>
-                        {%- endunless -%}
-                    {%- endif -%}
-                {%- endfor -%}
-            </ul>
+
+            <div class="gallery-card">
+                <div class="gallery-carousel">
+                    {%- for file in site.static_files -%}
+                        {%- if file.path contains post.image_path -%}
+                            {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
+                                <img src="{{ file.path }}">
+                                <!-- Maybe parse the filepath to get a caption -->
+                            {%- endunless -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                </div>
+ 
+                <div class="gallery-info">
+                    <!-- Style this like the post layout without a picture -->
+                    {{ post.title }}
+                </div>
+            </div>
+            <br>
 
         {%- endif -%}
 

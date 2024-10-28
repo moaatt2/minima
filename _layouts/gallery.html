@@ -3,100 +3,104 @@ layout: base
 ---
 
 
-<div class="carousel-container prevent-animation" id="carousel-test">
-    <img class="fade" style="display: block;" src="/assets/images/posts/2024_06_16_japanese_12_in_2/japanese_12_in_2_flat.jpg">
-    <img class="fade" style="display: none;"  src="/assets/images/posts/2024_06_09_japanese_6_in_1/japanese_6_in_1_flat.jpg">
-    <img class="fade" style="display: none;"  src="/assets/images/posts/2024_06_02_japanese_8_in_2/japanese_8_in_2_flat.jpg">
-    <a class="carousel-nav carousel-last" onclick="changeSlide('carousel-test', 'last')">&#10094;</a>
-    <a class="carousel-nav carousel-next" onclick="changeSlide('carousel-test', 'next')">&#10095;</a>
+<div class="carousel-container">
+    <div class="carousel-wrapper prevent-animation" id="carousel-test">
+        <!-- Cloned last slide for smooth wraparound -->
+        <div class="carousel-slide">
+            <img src="/assets/images/posts/2024_06_02_japanese_8_in_2/japanese_8_in_2_flat.jpg" alt="Slide Image">
+        </div>
+        <!-- Original slides -->
+        <div class="carousel-slide">
+            <img src="/assets/images/posts/2024_06_16_japanese_12_in_2/japanese_12_in_2_flat.jpg" alt="Slide Image">
+        </div>
+        <div class="carousel-slide">
+            <img src="/assets/images/posts/2024_06_09_japanese_6_in_1/japanese_6_in_1_flat.jpg" alt="Slide Image">
+        </div>
+        <div class="carousel-slide">
+            <img src="/assets/images/posts/2024_06_02_japanese_8_in_2/japanese_8_in_2_flat.jpg" alt="Slide Image">
+        </div>
+        <!-- Cloned first slide for smooth wraparound -->
+        <div class="carousel-slide">
+            <img src="/assets/images/posts/2024_06_16_japanese_12_in_2/japanese_12_in_2_flat.jpg" alt="Slide Image">
+        </div>
+    </div>
+    <a class="carousel-nav carousel-last" onclick="changeSlide('last')">&#10094;</a>
+    <a class="carousel-nav carousel-next" onclick="changeSlide('next')">&#10095;</a>
 </div>
 
 <style>
-
     .carousel-container {
         position: relative;
-        margin: auto;
         width: 100%;
+        max-width: 600px; /* Adjust width as needed */
+        height: 400px;    /* Set a fixed height for the carousel */
+        margin: auto;
+        overflow: hidden;
     }
 
-    /* Style carousel nav buttons */
+    .carousel-wrapper {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        transition: transform 0.5s ease;
+    }
+
+    .carousel-slide {
+        min-width: 100%;
+        height: 100%; /* Make each slide take full carousel height */
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .carousel-slide img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }
+
     .carousel-nav {
         cursor: pointer;
         position: absolute;
         top: 50%;
-        width: auto;
-        margin-top: -22px;
         padding: 16px;
         color: white;
         font-weight: bold;
         font-size: 18px;
-        transition: 0.6s ease;
-        border-radius: 0 3px 3px 0;
         user-select: none;
+        transform: translateY(-50%);
     }
 
-    
-    /* Position the "next button" to the right */
+    .carousel-last {
+        left: 0;
+    }
+
     .carousel-next {
         right: 0;
-        border-radius: 3px 0 0 3px;
     }
 
-    /* On hover, add a black background color with a little bit see-through */
     .carousel-last:hover, .carousel-next:hover {
-        background-color: rgba(0,0,0,0.8);
+        background-color: rgba(0, 0, 0, 0.8);
         text-decoration: none;
     }
 
-    /* Animation stuff */
-    .fade {
-        animation-name: fade;
-        animation-duration: 1.5s;
+    .prevent-animation {
+        transition: none !important;
     }
-
-    .prevent-animation *{
-        animation-duration: 0s;
-    }
-
-    @keyframes fade {
-        from {opacity: .3}
-        to {opacity: 1}
-    }
-
 </style>
 
-
 <script>
+    let currentIndex = 1; // Start at the first "real" slide
+    const wrapper = document.getElementById('carousel-test');
+    const slides = wrapper.getElementsByClassName('carousel-slide');
+    const totalSlides = slides.length;
 
-    // Move to next slide
-    function changeSlide(containerId, direction) {
-
-        // Get current div
-        let div = document.getElementById(containerId);
-
-        // How many images in container
-        let images = div.getElementsByTagName("img");
-
-        // Find currently showing item
-        let showing;
-        for (let i=0; i<images.length; i++) {
-            if (images[i].style.display === "block") {
-                showing = i;
-            }
-        }
-        console.log(`Currently Showing: ${showing}`);
-
-        // Find new slide
-        let change = direction === "next" ? 1 : -1; // Determine direction of change
-        let next = (showing + change)               // apply change
-        next = next % images.length;                // Account for overflow  - next on final image
-        next = next < 0 ? images.length - 1 :  next // Account for underflow - last on first image
-        console.log(`Next Showing ${next}`);
-
-        // Hide current & show new
-        images[showing].style.display = "none";
-        images[next].style.display    = "block"
-    }
+    // Initial position to show the first real slide
+    wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
 
     // Wait for the page to load and remove the lock on animations
     let div = document.getElementById('carousel-test');
@@ -106,7 +110,36 @@ layout: base
         }, 1000);
     });
 
+    function changeSlide(direction) {
+        // Increment or decrement index based on direction
+        if (direction === 'next') {
+            currentIndex++;
+        } else {
+            currentIndex--;
+        }
+
+        // Smooth slide transition
+        wrapper.style.transition = 'transform 0.5s ease';
+        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Wraparound logic with a delay to reset without transition
+        wrapper.addEventListener('transitionend', () => {
+            if (currentIndex === totalSlides - 1) {
+                currentIndex = 1;
+                wrapper.style.transition = 'none';
+                wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+            if (currentIndex === 0) {
+                currentIndex = totalSlides - 2;
+                wrapper.style.transition = 'none';
+                wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+        }, { once: true });
+    }
 </script>
+
+
+
 
 <hr>
 

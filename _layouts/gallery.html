@@ -4,7 +4,7 @@ layout: base
 
 
 <div class="carousel-container">
-    <div class="carousel-wrapper prevent-animation" id="carousel-test">
+    <div class="carousel-wrapper prevent-animation" style="transform: translateX(-100%);" id="carousel-test">
         <!-- Cloned last slide for smooth wraparound -->
         <div class="carousel-slide">
             <img src="/assets/images/posts/2024_06_02_japanese_8_in_2/japanese_8_in_2_flat.jpg" alt="Slide Image">
@@ -24,8 +24,8 @@ layout: base
             <img src="/assets/images/posts/2024_06_16_japanese_12_in_2/japanese_12_in_2_flat.jpg" alt="Slide Image">
         </div>
     </div>
-    <a class="carousel-nav carousel-last" onclick="changeSlide('last')">&#10094;</a>
-    <a class="carousel-nav carousel-next" onclick="changeSlide('next')">&#10095;</a>
+    <a class="carousel-nav carousel-last" onclick="changeSlide('carousel-test', 'last')">&#10094;</a>
+    <a class="carousel-nav carousel-next" onclick="changeSlide('carousel-test', 'next')">&#10095;</a>
 </div>
 
 <style>
@@ -94,13 +94,6 @@ layout: base
 </style>
 
 <script>
-    let currentIndex = 1; // Start at the first "real" slide
-    const wrapper = document.getElementById('carousel-test');
-    const slides = wrapper.getElementsByClassName('carousel-slide');
-    const totalSlides = slides.length;
-
-    // Initial position to show the first real slide
-    wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
 
     // Wait for the page to load and remove the lock on animations
     let div = document.getElementById('carousel-test');
@@ -110,7 +103,19 @@ layout: base
         }, 1000);
     });
 
-    function changeSlide(direction) {
+    // Slide change function
+    function changeSlide(wrapperId, direction) {
+
+        // Get the appropriate wrapper and slides
+        let wrapper = document.getElementById('carousel-test');
+        let slides = wrapper.getElementsByClassName('carousel-slide');
+        let totalSlides = slides.length;
+
+        // Find current index
+        let transform = wrapper.style.transform;
+        let transformPercentage = transform.split("(")[1].split("%")[0];
+        let currentIndex = Number(transformPercentage)/-100;
+
         // Increment or decrement index based on direction
         if (direction === 'next') {
             currentIndex++;

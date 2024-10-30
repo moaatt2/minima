@@ -3,8 +3,8 @@ layout: base
 ---
 
 
-<div class="carousel-container">
-    <div class="carousel-wrapper prevent-animation" style="transform: translateX(-100%);" id="carousel-test">
+<div class="carousel-container" id="carousel-test">
+    <div class="carousel-wrapper prevent-animation" style="transform: translateX(-100%);">
         <!-- Cloned last slide for smooth wraparound -->
         <div class="carousel-slide">
             <img src="/assets/images/posts/2024_06_02_japanese_8_in_2/japanese_8_in_2_flat.jpg" alt="Slide Image">
@@ -96,10 +96,12 @@ layout: base
 <script>
 
     // Wait for the page to load and remove the lock on animations
-    let div = document.getElementById('carousel-test');
     document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
-            div.classList.remove("prevent-animation");
+            let wrappers = document.getElementsByClassName("prevent-animation");
+            Array.from(wrappers).forEach(element => {
+                element.classList.remove("prevent-animation");
+            });
         }, 1000);
     });
 
@@ -107,9 +109,16 @@ layout: base
     function changeSlide(wrapperId, direction) {
 
         // Get the appropriate wrapper and slides
-        let wrapper = document.getElementById('carousel-test');
+        let container = document.getElementById('carousel-test');
+        let wrapper = container.getElementsByClassName('carousel-wrapper')[0];
         let slides = wrapper.getElementsByClassName('carousel-slide');
         let totalSlides = slides.length;
+
+        // Disable buttons
+        let nextButton = container.getElementsByClassName("carousel-next")[0];
+        let lastButton = container.getElementsByClassName("carousel-last")[0];
+        lastButton.setAttribute("onclick", "");
+        nextButton.setAttribute("onclick", "");
 
         // Find current index
         let transform = wrapper.style.transform;
@@ -139,6 +148,10 @@ layout: base
                 wrapper.style.transition = 'none';
                 wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
             }
+
+            // enable buttons after animation finishes
+            lastButton.setAttribute("onclick", `changeSlide('${wrapperId}', 'last')`);
+            nextButton.setAttribute("onclick", `changeSlide('${wrapperId}', 'next')`);
         }, { once: true });
     }
 </script>

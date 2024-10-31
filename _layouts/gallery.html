@@ -27,6 +27,13 @@ layout: base
     <a class="carousel-nav carousel-last" onclick="changeSlide('carousel-test', 'last')">&#10094;</a>
     <a class="carousel-nav carousel-next" onclick="changeSlide('carousel-test', 'next')">&#10095;</a>
 </div>
+<!-- The dots/circles -->
+<div class="dot-container" style="text-align:center">
+    <span class="dot" onclick="setSlide('carousel-test', 1)"></span>
+    <span class="dot" onclick="setSlide('carousel-test', 2)"></span>
+    <span class="dot" onclick="setSlide('carousel-test', 3)"></span>
+</div>
+
 
 <style>
     .carousel-container {
@@ -91,6 +98,31 @@ layout: base
     .prevent-animation {
         transition: none !important;
     }
+
+    /* Styling of indicator dots */
+    .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+    .dot:hover {
+        background-color: #717171;
+    }
+
+
+    /* possibly style dot container over the image? */
+    /* .dot-container {
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        transform: translate(-50%, -5%);
+    } */
 </style>
 
 <script>
@@ -149,6 +181,34 @@ layout: base
                 wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
             }
 
+            // enable buttons after animation finishes
+            lastButton.setAttribute("onclick", `changeSlide('${wrapperId}', 'last')`);
+            nextButton.setAttribute("onclick", `changeSlide('${wrapperId}', 'next')`);
+        }, { once: true });
+    }
+
+    // Slide change function
+    function setSlide(wrapperId, slideNumber) {
+
+        // Get the appropriate wrapper and slides
+        let container = document.getElementById('carousel-test');
+        let wrapper = container.getElementsByClassName('carousel-wrapper')[0];
+
+        // Disable buttons
+        let nextButton = container.getElementsByClassName("carousel-next")[0];
+        let lastButton = container.getElementsByClassName("carousel-last")[0];
+        lastButton.setAttribute("onclick", "");
+        nextButton.setAttribute("onclick", "");
+
+        // Find current index
+        let currentIndex = slideNumber;
+
+        // Smooth slide transition
+        wrapper.style.transition = 'transform 0.5s ease';
+        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Enable 
+        wrapper.addEventListener('transitionend', () => {
             // enable buttons after animation finishes
             lastButton.setAttribute("onclick", `changeSlide('${wrapperId}', 'last')`);
             nextButton.setAttribute("onclick", `changeSlide('${wrapperId}', 'next')`);

@@ -219,8 +219,17 @@ layout: base
         lastButton.setAttribute("onclick", "");
         nextButton.setAttribute("onclick", "");
 
+        // Get Dots and make all inactive
+        let dots = document.getElementById(`${wrapperId}-dots`).getElementsByTagName("span");
+        Array.from(dots).forEach(element => {
+            element.classList.remove("dot-active")
+        });
+
         // Find current index
         let currentIndex = slideNumber;
+
+        // Mark current slide's dot active
+        dots[slideNumber - 1].classList.add('dot-active');
 
         // Smooth slide transition
         wrapper.style.transition = 'transform 0.5s ease';

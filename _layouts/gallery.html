@@ -150,6 +150,12 @@ layout: base
         let slides = wrapper.getElementsByClassName('carousel-slide');
         let totalSlides = slides.length;
 
+        // Get Dots and make all inactive
+        let dots = document.getElementById(`${wrapperId}-dots`).getElementsByTagName("span");
+        Array.from(dots).forEach(element => {
+            element.classList.remove("dot-active")
+        });
+
         // Disable buttons
         let nextButton = container.getElementsByClassName("carousel-next")[0];
         let lastButton = container.getElementsByClassName("carousel-last")[0];
@@ -166,6 +172,15 @@ layout: base
             currentIndex++;
         } else {
             currentIndex--;
+        }
+
+        // Make appropriate dot active
+        if (currentIndex === totalSlides - 1) {
+            dots[0].classList.add('dot-active');
+        } else if (currentIndex === 0) {
+            dots[dots.length-1].classList.add('dot-active');
+        } else {
+            dots[currentIndex-1].classList.add('dot-active');
         }
 
         // Smooth slide transition

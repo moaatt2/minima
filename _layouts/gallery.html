@@ -28,8 +28,8 @@ layout: base
     <a class="carousel-nav carousel-next" onclick="changeSlide('carousel-test', 'next')">&#10095;</a>
 </div>
 <!-- The dots/circles -->
-<div class="dot-container" style="text-align:center">
-    <span class="dot" onclick="setSlide('carousel-test', 1)"></span>
+<div class="dot-container" style="text-align:center" id="carousel-test-dots">
+    <span class="dot dot-active" onclick="setSlide('carousel-test', 1)"></span>
     <span class="dot" onclick="setSlide('carousel-test', 2)"></span>
     <span class="dot" onclick="setSlide('carousel-test', 3)"></span>
 </div>
@@ -112,6 +112,10 @@ layout: base
     }
 
     .dot:hover {
+        background-color: #717171;
+    }
+
+    .dot-active {
         background-color: #717171;
     }
 

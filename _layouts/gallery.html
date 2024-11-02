@@ -265,24 +265,62 @@ layout: base
         <!-- List images for post if there is at least 1 image -->
         {%- if num_images > 1 -%}
 
-            <div class="gallery-card">
-                <div class="gallery-carousel">
+            <!-- Find first and last images -->
+            {%- assign first_image = "" -%}
+            {%- for file in site.static_files -%}
+                {%- if file.path contains post.image_path -%}
+                    {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
+                        <!-- Find last image -->
+                        {%- assign last_image = file.path -%}
+
+                        <!-- Find first image -->
+                        {%- if first_image == "" -%}
+                            {%- assign first_image = file.path -%}
+                        {%- endif -%}
+                    {%- endunless -%}
+                {%- endif -%}
+            {%- endfor -%}
+
+
+            <div class="carousel-container" id="{{post.title}}-carousel">
+                
+                <div class="carousel-wrapper prevent-animation" style="transform: translateX(-100%);">
+
+                    <!-- Cloned Last Slide -->
+                    <div class="carousel-slide"><img src="{{ last_image }}"></div>
+
+                    <!-- Slides -->
                     {%- for file in site.static_files -%}
                         {%- if file.path contains post.image_path -%}
                             {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
-                                <img src="{{ file.path }}">
-                                <!-- Maybe parse the filepath to get a caption -->
+                            <div class="carousel-slide"><img src="{{ file.path }}"></div>
+                            {%- assign last_image = file.path -%}
                             {%- endunless -%}
                         {%- endif -%}
                     {%- endfor -%}
+
+                    <!-- Cloned First Slide -->
+                    <div class="carousel-slide"><img src="{{ first_image }}"></div>
+
                 </div>
- 
-                <div class="gallery-info">
-                    <!-- Style this like the post layout without a picture -->
-                    {{ post.title }}
-                </div>
+
+                <!-- Nav Buttons -->
+                <a class="carousel-nav carousel-last" onclick="changeSlide('{{ post.title }}-carousel', 'last')">&#10094;</a>
+                <a class="carousel-nav carousel-next" onclick="changeSlide('{{ post.title }}-carousel', 'next')">&#10095;</a>
             </div>
-            <br>
+            <div class="dot-container" style="text-align: center;" id="{{ post.title }}-carousel-dots">
+                {%- for i in (1..num_images) -%}
+                    {%- if i == 1 -%}
+                        <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot dot-active"></span>
+                    {%- else -%}
+                        <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot"></span>
+                    {%- endif -%}
+                {%- endfor -%}
+            </div>
+            <div class="gallery-info">
+                <!-- Style this like the post layout without a picture -->
+                {{ post.title }}
+            </div>
 
         {%- endif -%}
 

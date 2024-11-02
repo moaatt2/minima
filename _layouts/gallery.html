@@ -2,135 +2,86 @@
 layout: base
 ---
 
+{% for post in site.posts %}
+    {%- if post.image_path -%}
 
-<div class="carousel-container" id="carousel-test">
-    <div class="carousel-wrapper prevent-animation" style="transform: translateX(-100%);">
-        <!-- Cloned last slide for smooth wraparound -->
-        <div class="carousel-slide">
-            <img src="/assets/images/posts/2024_06_02_japanese_8_in_2/japanese_8_in_2_flat.jpg" alt="Slide Image">
-        </div>
-        <!-- Original slides -->
-        <div class="carousel-slide">
-            <img src="/assets/images/posts/2024_06_16_japanese_12_in_2/japanese_12_in_2_flat.jpg" alt="Slide Image">
-        </div>
-        <div class="carousel-slide">
-            <img src="/assets/images/posts/2024_06_09_japanese_6_in_1/japanese_6_in_1_flat.jpg" alt="Slide Image">
-        </div>
-        <div class="carousel-slide">
-            <img src="/assets/images/posts/2024_06_02_japanese_8_in_2/japanese_8_in_2_flat.jpg" alt="Slide Image">
-        </div>
-        <!-- Cloned first slide for smooth wraparound -->
-        <div class="carousel-slide">
-            <img src="/assets/images/posts/2024_06_16_japanese_12_in_2/japanese_12_in_2_flat.jpg" alt="Slide Image">
-        </div>
-    </div>
-    <a class="carousel-nav carousel-last" onclick="changeSlide('carousel-test', 'last')">&#10094;</a>
-    <a class="carousel-nav carousel-next" onclick="changeSlide('carousel-test', 'next')">&#10095;</a>
-</div>
-<!-- The dots/circles -->
-<div class="dot-container" style="text-align:center" id="carousel-test-dots">
-    <span class="dot dot-active" onclick="setSlide('carousel-test', 1)"></span>
-    <span class="dot" onclick="setSlide('carousel-test', 2)"></span>
-    <span class="dot" onclick="setSlide('carousel-test', 3)"></span>
-</div>
+        <!-- Count Images -->
+        {%- assign num_images = 0 -%}
+        {%- for file in site.static_files -%}
+            {%- if file.path contains post.image_path -%}
+                {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
+                    {%- assign num_images = num_images | plus:1 -%}
+                {%- endunless -%}
+            {%- endif -%}
+        {%- endfor -%}
 
+        <!-- List images for post if there is at least 1 image -->
+        {%- if num_images > 1 -%}
 
-<style>
-    .carousel-container {
-        position: relative;
-        width: 100%;
-        max-width: 600px; /* Adjust width as needed */
-        height: 400px;    /* Set a fixed height for the carousel */
-        margin: auto;
-        overflow: hidden;
-    }
+            <!-- Find first and last images -->
+            {%- assign first_image = "" -%}
+            {%- for file in site.static_files -%}
+                {%- if file.path contains post.image_path -%}
+                    {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
+                        <!-- Find last image -->
+                        {%- assign last_image = file.path -%}
 
-    .carousel-wrapper {
-        display: flex;
-        height: 100%;
-        width: 100%;
-        transition: transform 0.5s ease;
-    }
-
-    .carousel-slide {
-        min-width: 100%;
-        height: 100%; /* Make each slide take full carousel height */
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-
-    .carousel-slide img {
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;
-        object-fit: contain;
-    }
-
-    .carousel-nav {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        padding: 16px;
-        color: white;
-        font-weight: bold;
-        font-size: 18px;
-        user-select: none;
-        transform: translateY(-50%);
-    }
-
-    .carousel-last {
-        left: 0;
-    }
-
-    .carousel-next {
-        right: 0;
-    }
-
-    .carousel-last:hover, .carousel-next:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-        text-decoration: none;
-    }
-
-    .prevent-animation {
-        transition: none !important;
-    }
-
-    /* Styling of indicator dots */
-    .dot {
-        cursor: pointer;
-        height: 15px;
-        width: 15px;
-        margin: 0 2px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-    }
-
-    .dot:hover {
-        background-color: #717171;
-    }
-
-    .dot-active {
-        background-color: #717171;
-    }
+                        <!-- Find first image -->
+                        {%- if first_image == "" -%}
+                            {%- assign first_image = file.path -%}
+                        {%- endif -%}
+                    {%- endunless -%}
+                {%- endif -%}
+            {%- endfor -%}
 
 
-    /* possibly style dot container over the image? */
-    /* .dot-container {
-        position: absolute;
-        bottom: 5%;
-        left: 50%;
-        transform: translate(-50%, -5%);
-    } */
-</style>
+            <div class="carousel-container" id="{{post.title}}-carousel">
+                
+                <div class="carousel-wrapper prevent-animation" style="transform: translateX(-100%);">
+
+                    <!-- Cloned Last Slide -->
+                    <div class="carousel-slide"><img src="{{ last_image }}"></div>
+
+                    <!-- Slides -->
+                    {%- for file in site.static_files -%}
+                        {%- if file.path contains post.image_path -%}
+                            {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
+                            <div class="carousel-slide"><img src="{{ file.path }}"></div>
+                            {%- assign last_image = file.path -%}
+                            {%- endunless -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+
+                    <!-- Cloned First Slide -->
+                    <div class="carousel-slide"><img src="{{ first_image }}"></div>
+
+                </div>
+
+                <!-- Nav Buttons -->
+                <a class="carousel-nav carousel-last" onclick="changeSlide('{{ post.title }}-carousel', 'last')">&#10094;</a>
+                <a class="carousel-nav carousel-next" onclick="changeSlide('{{ post.title }}-carousel', 'next')">&#10095;</a>
+            </div>
+            <div class="dot-container" style="text-align: center;" id="{{ post.title }}-carousel-dots">
+                {%- for i in (1..num_images) -%}
+                    {%- if i == 1 -%}
+                        <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot dot-active"></span>
+                    {%- else -%}
+                        <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot"></span>
+                    {%- endif -%}
+                {%- endfor -%}
+            </div>
+            <div class="gallery-info">
+                <!-- Style this like the post layout without a picture -->
+                {{ post.title }}
+            </div>
+
+        {%- endif -%}
+
+    {%- endif -%}
+{% endfor %}
+
 
 <script>
-
     // Wait for the page to load and remove the lock on animations
     document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
@@ -244,85 +195,96 @@ layout: base
     }
 </script>
 
+<style>
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px; /* Adjust width as needed */
+        height: 400px;    /* Set a fixed height for the carousel */
+        margin: auto;
+        overflow: hidden;
+    }
+
+    .carousel-wrapper {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        transition: transform 0.5s ease;
+    }
+
+    .carousel-slide {
+        min-width: 100%;
+        height: 100%; /* Make each slide take full carousel height */
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .carousel-slide img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .carousel-nav {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        user-select: none;
+        transform: translateY(-50%);
+    }
+
+    .carousel-last {
+        left: 0;
+    }
+
+    .carousel-next {
+        right: 0;
+    }
+
+    .carousel-last:hover, .carousel-next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+        text-decoration: none;
+    }
+
+    .prevent-animation {
+        transition: none !important;
+    }
+
+    /* Styling of indicator dots */
+    .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+    .dot:hover {
+        background-color: #717171;
+    }
+
+    .dot-active {
+        background-color: #717171;
+    }
 
 
-
-<hr>
-
-{% for post in site.posts %}
-    {%- if post.image_path -%}
-
-        <!-- Count Images -->
-        {%- assign num_images = 0 -%}
-        {%- for file in site.static_files -%}
-            {%- if file.path contains post.image_path -%}
-                {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
-                    {%- assign num_images = num_images | plus:1 -%}
-                {%- endunless -%}
-            {%- endif -%}
-        {%- endfor -%}
-
-        <!-- List images for post if there is at least 1 image -->
-        {%- if num_images > 1 -%}
-
-            <!-- Find first and last images -->
-            {%- assign first_image = "" -%}
-            {%- for file in site.static_files -%}
-                {%- if file.path contains post.image_path -%}
-                    {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
-                        <!-- Find last image -->
-                        {%- assign last_image = file.path -%}
-
-                        <!-- Find first image -->
-                        {%- if first_image == "" -%}
-                            {%- assign first_image = file.path -%}
-                        {%- endif -%}
-                    {%- endunless -%}
-                {%- endif -%}
-            {%- endfor -%}
-
-
-            <div class="carousel-container" id="{{post.title}}-carousel">
-                
-                <div class="carousel-wrapper prevent-animation" style="transform: translateX(-100%);">
-
-                    <!-- Cloned Last Slide -->
-                    <div class="carousel-slide"><img src="{{ last_image }}"></div>
-
-                    <!-- Slides -->
-                    {%- for file in site.static_files -%}
-                        {%- if file.path contains post.image_path -%}
-                            {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
-                            <div class="carousel-slide"><img src="{{ file.path }}"></div>
-                            {%- assign last_image = file.path -%}
-                            {%- endunless -%}
-                        {%- endif -%}
-                    {%- endfor -%}
-
-                    <!-- Cloned First Slide -->
-                    <div class="carousel-slide"><img src="{{ first_image }}"></div>
-
-                </div>
-
-                <!-- Nav Buttons -->
-                <a class="carousel-nav carousel-last" onclick="changeSlide('{{ post.title }}-carousel', 'last')">&#10094;</a>
-                <a class="carousel-nav carousel-next" onclick="changeSlide('{{ post.title }}-carousel', 'next')">&#10095;</a>
-            </div>
-            <div class="dot-container" style="text-align: center;" id="{{ post.title }}-carousel-dots">
-                {%- for i in (1..num_images) -%}
-                    {%- if i == 1 -%}
-                        <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot dot-active"></span>
-                    {%- else -%}
-                        <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot"></span>
-                    {%- endif -%}
-                {%- endfor -%}
-            </div>
-            <div class="gallery-info">
-                <!-- Style this like the post layout without a picture -->
-                {{ post.title }}
-            </div>
-
-        {%- endif -%}
-
-    {%- endif -%}
-{% endfor %}
+    /* possibly style dot container over the image? */
+    /* .dot-container {
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        transform: translate(-50%, -5%);
+    } */
+</style>

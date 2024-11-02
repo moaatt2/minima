@@ -145,7 +145,7 @@ layout: base
     function changeSlide(wrapperId, direction) {
 
         // Get the appropriate wrapper and slides
-        let container = document.getElementById('carousel-test');
+        let container = document.getElementById(wrapperId);
         let wrapper = container.getElementsByClassName('carousel-wrapper')[0];
         let slides = wrapper.getElementsByClassName('carousel-slide');
         let totalSlides = slides.length;
@@ -210,7 +210,7 @@ layout: base
     function setSlide(wrapperId, slideNumber) {
 
         // Get the appropriate wrapper and slides
-        let container = document.getElementById('carousel-test');
+        let container = document.getElementById(wrapperId);
         let wrapper = container.getElementsByClassName('carousel-wrapper')[0];
 
         // Disable buttons

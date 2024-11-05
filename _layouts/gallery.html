@@ -12,8 +12,10 @@ layout: base
         {%- assign num_images = 0 -%}
         {%- for file in site.static_files -%}
             {%- if file.path contains post.image_path -%}
-                {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
-                    {%- assign num_images = num_images | plus:1 -%}
+                {%- unless file.path contains '_step_' and page.show_progress == false -%}
+                    {%- unless file.path contains '_tutorial_' and page.show_tutorial == false -%}
+                        {%- assign num_images = num_images | plus:1 -%}
+                    {%- endunless -%}
                 {%- endunless -%}
             {%- endif -%}
         {%- endfor -%}
@@ -25,14 +27,16 @@ layout: base
             {%- assign first_image = "" -%}
             {%- for file in site.static_files -%}
                 {%- if file.path contains post.image_path -%}
-                    {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
-                        <!-- Find last image -->
-                        {%- assign last_image = file.path -%}
+                    {%- unless file.path contains '_step_' and page.show_progress == false -%}
+                        {%- unless file.path contains '_tutorial_' and page.show_tutorial == false -%}
+                            <!-- Find last image -->
+                            {%- assign last_image = file.path -%}
 
-                        <!-- Find first image -->
-                        {%- if first_image == "" -%}
-                            {%- assign first_image = file.path -%}
-                        {%- endif -%}
+                            <!-- Find first image -->
+                            {%- if first_image == "" -%}
+                                {%- assign first_image = file.path -%}
+                            {%- endif -%}
+                        {%- endunless -%}
                     {%- endunless -%}
                 {%- endif -%}
             {%- endfor -%}
@@ -49,9 +53,10 @@ layout: base
                         <!-- Slides -->
                         {%- for file in site.static_files -%}
                             {%- if file.path contains post.image_path -%}
-                                {%- unless file.path contains '_step_' or file.path contains '_tutorial_' -%}
-                                <div class="carousel-slide"><img src="{{ file.path }}"></div>
-                                {%- assign last_image = file.path -%}
+                                {%- unless file.path contains '_step_' and page.show_progress == false -%}
+                                    {%- unless file.path contains '_tutorial_' and page.show_tutorial == false -%}
+                                        <div class="carousel-slide"><img src="{{ file.path }}"></div>
+                                    {%- endunless -%}
                                 {%- endunless -%}
                             {%- endif -%}
                         {%- endfor -%}

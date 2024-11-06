@@ -3,7 +3,21 @@ layout: base
 ---
 
 
+<!-- Set dateformat for use in gallery info -->
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+
+
+<!-- Set default null behaviour for show_progress and show_tutorial -->
+{%- assign show_progress = false -%}
+{%- if page.show_progress -%}
+    {%- assign show_progress = page.show_progress -%}
+{%- endif -%}
+
+{%- assign show_tutorial = false -%}
+{%- if page.show_tutorial -%}
+    {%- assign show_tutorial = page.show_tutorial -%}
+{%- endif -%}
+
 
 {% for post in site.posts %}
     {%- if post.image_path -%}
@@ -12,8 +26,8 @@ layout: base
         {%- assign num_images = 0 -%}
         {%- for file in site.static_files -%}
             {%- if file.path contains post.image_path -%}
-                {%- unless file.path contains '_step_' and page.show_progress == false -%}
-                    {%- unless file.path contains '_tutorial_' and page.show_tutorial == false -%}
+                {%- unless file.path contains '_step_' and show_progress == false -%}
+                    {%- unless file.path contains '_tutorial_' and show_tutorial == false -%}
                         {%- assign num_images = num_images | plus:1 -%}
                     {%- endunless -%}
                 {%- endunless -%}
@@ -27,8 +41,8 @@ layout: base
             {%- assign first_image = "" -%}
             {%- for file in site.static_files -%}
                 {%- if file.path contains post.image_path -%}
-                    {%- unless file.path contains '_step_' and page.show_progress == false -%}
-                        {%- unless file.path contains '_tutorial_' and page.show_tutorial == false -%}
+                    {%- unless file.path contains '_step_' and show_progress == false -%}
+                        {%- unless file.path contains '_tutorial_' and show_tutorial == false -%}
                             <!-- Find last image -->
                             {%- assign last_image = file.path -%}
 
@@ -53,8 +67,8 @@ layout: base
                         <!-- Slides -->
                         {%- for file in site.static_files -%}
                             {%- if file.path contains post.image_path -%}
-                                {%- unless file.path contains '_step_' and page.show_progress == false -%}
-                                    {%- unless file.path contains '_tutorial_' and page.show_tutorial == false -%}
+                                {%- unless file.path contains '_step_' and show_progress == false -%}
+                                    {%- unless file.path contains '_tutorial_' and show_tutorial == false -%}
                                         <div class="carousel-slide"><img src="{{ file.path }}"></div>
                                     {%- endunless -%}
                                 {%- endunless -%}

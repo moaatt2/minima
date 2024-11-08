@@ -19,100 +19,102 @@ layout: base_wide
 {%- endif -%}
 
 
-{% for post in site.posts %}
-    {%- if post.image_path -%}
+<div class="gallery">
+    {% for post in site.posts %}
+        {%- if post.image_path -%}
 
-        <!-- Count Images -->
-        {%- assign num_images = 0 -%}
-        {%- for file in site.static_files -%}
-            {%- if file.path contains post.image_path -%}
-                {%- unless file.path contains '_step_' and show_progress == false -%}
-                    {%- unless file.path contains '_tutorial_' and show_tutorial == false -%}
-                        {%- assign num_images = num_images | plus:1 -%}
-                    {%- endunless -%}
-                {%- endunless -%}
-            {%- endif -%}
-        {%- endfor -%}
-
-        <!-- List images for post if there is at least 1 image -->
-        {%- if num_images > 1 -%}
-
-            <!-- Find first and last images -->
-            {%- assign first_image = "" -%}
+            <!-- Count Images -->
+            {%- assign num_images = 0 -%}
             {%- for file in site.static_files -%}
                 {%- if file.path contains post.image_path -%}
                     {%- unless file.path contains '_step_' and show_progress == false -%}
                         {%- unless file.path contains '_tutorial_' and show_tutorial == false -%}
-                            <!-- Find last image -->
-                            {%- assign last_image = file.path -%}
-
-                            <!-- Find first image -->
-                            {%- if first_image == "" -%}
-                                {%- assign first_image = file.path -%}
-                            {%- endif -%}
+                            {%- assign num_images = num_images | plus:1 -%}
                         {%- endunless -%}
                     {%- endunless -%}
                 {%- endif -%}
             {%- endfor -%}
 
+            <!-- List images for post if there is at least 1 image -->
+            {%- if num_images > 1 -%}
 
-            <div class="gallery-card">
-                <div class="carousel-container" id="{{post.title}}-carousel">
-                    
-                    <div class="carousel-wrapper prevent-animation" style="transform: translateX(-100%);">
+                <!-- Find first and last images -->
+                {%- assign first_image = "" -%}
+                {%- for file in site.static_files -%}
+                    {%- if file.path contains post.image_path -%}
+                        {%- unless file.path contains '_step_' and show_progress == false -%}
+                            {%- unless file.path contains '_tutorial_' and show_tutorial == false -%}
+                                <!-- Find last image -->
+                                {%- assign last_image = file.path -%}
 
-                        <!-- Cloned Last Slide -->
-                        <div class="carousel-slide"><img src="{{ last_image }}"></div>
+                                <!-- Find first image -->
+                                {%- if first_image == "" -%}
+                                    {%- assign first_image = file.path -%}
+                                {%- endif -%}
+                            {%- endunless -%}
+                        {%- endunless -%}
+                    {%- endif -%}
+                {%- endfor -%}
 
-                        <!-- Slides -->
-                        {%- for file in site.static_files -%}
-                            {%- if file.path contains post.image_path -%}
-                                {%- unless file.path contains '_step_' and show_progress == false -%}
-                                    {%- unless file.path contains '_tutorial_' and show_tutorial == false -%}
-                                        <div class="carousel-slide"><img src="{{ file.path }}"></div>
+
+                <div class="gallery-card">
+                    <div class="carousel-container" id="{{post.title}}-carousel">
+                        
+                        <div class="carousel-wrapper prevent-animation" style="transform: translateX(-100%);">
+
+                            <!-- Cloned Last Slide -->
+                            <div class="carousel-slide"><img src="{{ last_image }}"></div>
+
+                            <!-- Slides -->
+                            {%- for file in site.static_files -%}
+                                {%- if file.path contains post.image_path -%}
+                                    {%- unless file.path contains '_step_' and show_progress == false -%}
+                                        {%- unless file.path contains '_tutorial_' and show_tutorial == false -%}
+                                            <div class="carousel-slide"><img src="{{ file.path }}"></div>
+                                        {%- endunless -%}
                                     {%- endunless -%}
-                                {%- endunless -%}
+                                {%- endif -%}
+                            {%- endfor -%}
+
+                            <!-- Cloned First Slide -->
+                            <div class="carousel-slide"><img src="{{ first_image }}"></div>
+
+                        </div>
+
+                        <!-- Nav Buttons -->
+                        <a class="carousel-nav carousel-last" onclick="changeSlide('{{ post.title }}-carousel', 'last')">&#10094;</a>
+                        <a class="carousel-nav carousel-next" onclick="changeSlide('{{ post.title }}-carousel', 'next')">&#10095;</a>
+                    </div>
+                    <div class="dot-container" style="text-align: center;" id="{{ post.title }}-carousel-dots">
+                        {%- for i in (1..num_images) -%}
+                            {%- if i == 1 -%}
+                                <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot dot-active"></span>
+                            {%- else -%}
+                                <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot"></span>
                             {%- endif -%}
                         {%- endfor -%}
-
-                        <!-- Cloned First Slide -->
-                        <div class="carousel-slide"><img src="{{ first_image }}"></div>
-
                     </div>
-
-                    <!-- Nav Buttons -->
-                    <a class="carousel-nav carousel-last" onclick="changeSlide('{{ post.title }}-carousel', 'last')">&#10094;</a>
-                    <a class="carousel-nav carousel-next" onclick="changeSlide('{{ post.title }}-carousel', 'next')">&#10095;</a>
-                </div>
-                <div class="dot-container" style="text-align: center;" id="{{ post.title }}-carousel-dots">
-                    {%- for i in (1..num_images) -%}
-                        {%- if i == 1 -%}
-                            <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot dot-active"></span>
-                        {%- else -%}
-                            <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot"></span>
+                    <div class="gallery-info">
+                        <span class="post-meta" style="vertical-align: middle;">{{ post.date | date: date_format }}</span>
+                        {%- if post.tags.first and site.tag_page -%}
+                            &nbsp;|
+                            {%- for tag in post.tags -%}
+                                &nbsp;<a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.tag_page }}#{{ tag }}">{{ tag }}</a>
+                            {%- endfor -%}
                         {%- endif -%}
-                    {%- endfor -%}
+                        <h3>
+                            <a class="post-link" href="{{ include.post.url | relative_url }}">
+                                {{ post.title | escape }}
+                            </a>
+                        </h3>
+                    </div>
                 </div>
-                <div class="gallery-info">
-                    <span class="post-meta" style="vertical-align: middle;">{{ post.date | date: date_format }}</span>
-                    {%- if post.tags.first and site.tag_page -%}
-                        &nbsp;|
-                        {%- for tag in post.tags -%}
-                            &nbsp;<a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.tag_page }}#{{ tag }}">{{ tag }}</a>
-                        {%- endfor -%}
-                    {%- endif -%}
-                    <h3>
-                        <a class="post-link" href="{{ include.post.url | relative_url }}">
-                            {{ post.title | escape }}
-                        </a>
-                    </h3>
-                </div>
-            </div>
+
+            {%- endif -%}
 
         {%- endif -%}
-
-    {%- endif -%}
-{% endfor %}
+    {% endfor %}
+</div>
 
 
 <script>
@@ -230,9 +232,23 @@ layout: base_wide
 </script>
 
 <style>
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+
+    @media (max-width: 600px) {
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+    }
+
     .gallery-card {
         max-width: 600px;
         margin: auto;
+        padding: .5rem;
     }
 
     .carousel-container {

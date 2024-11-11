@@ -1,0 +1,96 @@
+
+
+{%- if post.image_path -%}
+
+    {%- comment -%}<!-- Count Images -->{%- endcomment -%}
+    {%- assign num_images = 0 -%}
+    {%- for file in site.static_files -%}
+        {%- if file.path contains post.image_path -%}
+            {%- unless file.path contains '_step_' and show_progress == false -%}
+                {%- unless file.path contains '_tutorial_' and show_tutorial == false -%}
+                    {%- assign num_images = num_images | plus:1 -%}
+                {%- endunless -%}
+            {%- endunless -%}
+        {%- endif -%}
+    {%- endfor -%}
+
+    {%- comment -%}<!-- List images for post if there is at least 1 image -->{%- endcomment -%}
+    {%- if num_images > 1 -%}
+
+        {%- comment -%}<!--  Find first and last images -->{%- endcomment -%}
+        {%- assign first_image = "" -%}
+        {%- for file in site.static_files -%}
+            {%- if file.path contains post.image_path -%}
+                {%- unless file.path contains '_step_' and show_progress == false -%}
+                    {%- unless file.path contains '_tutorial_' and show_tutorial == false -%}
+
+                        {%- comment -%}<!-- Find last image -->{%- endcomment -%}
+                        {%- assign last_image = file.path -%}
+
+                        {%- comment -%}<!-- Find first image -->{%- endcomment -%}
+                        {%- if first_image == "" -%}
+                            {%- assign first_image = file.path -%}
+                        {%- endif -%}
+                    {%- endunless -%}
+                {%- endunless -%}
+            {%- endif -%}
+        {%- endfor -%}
+
+
+        <div class="gallery-card">
+            <!-- Gallery Carousel -->
+            <div class="carousel-container" id="{{post.title}}-carousel">
+                <div class="carousel-wrapper prevent-animation" style="transform: translateX(-100%);">
+
+                    <!-- Cloned Last Slide -->
+                    <div class="carousel-slide"><img src="{{ last_image }}"></div>
+
+                    <!-- Slides -->
+                    {%- for file in site.static_files -%}
+                        {%- if file.path contains post.image_path -%}
+                            {%- unless file.path contains '_step_' and show_progress == false -%}
+                                {%- unless file.path contains '_tutorial_' and show_tutorial == false -%}
+                                    <div class="carousel-slide"><img src="{{ file.path }}"></div>
+                                {%- endunless -%}
+                            {%- endunless -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+
+                    <!-- Cloned First Slide -->
+                    <div class="carousel-slide"><img src="{{ first_image }}"></div>
+                </div>
+
+                <!-- Nav Buttons -->
+                <a class="carousel-nav carousel-last" onclick="changeSlide('{{ post.title }}-carousel', 'last')">&#10094;</a>
+                <a class="carousel-nav carousel-next" onclick="changeSlide('{{ post.title }}-carousel', 'next')">&#10095;</a>
+            </div>
+            <!-- Gallery Dots -->
+            <div class="dot-container" style="text-align: center;" id="{{ post.title }}-carousel-dots">
+                {%- for i in (1..num_images) -%}
+                    {%- if i == 1 -%}
+                        <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot dot-active"></span>
+                    {%- else -%}
+                        <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot"></span>
+                    {%- endif -%}
+                {%- endfor -%}
+            </div>
+            <!-- Gallery Info -->
+            <div class="gallery-info">
+                <span class="post-meta" style="vertical-align: middle;">{{ post.date | date: date_format }}</span>
+                {%- if post.tags.first and site.tag_page -%}
+                    &nbsp;|
+                    {%- for tag in post.tags -%}
+                        &nbsp;<a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.tag_page }}#{{ tag }}">{{ tag }}</a>
+                    {%- endfor -%}
+                {%- endif -%}
+                <h3>
+                    <a class="post-link" href="{{ post.url | relative_url }}">
+                        {{ post.title | escape }}
+                    </a>
+                </h3>
+            </div>
+        </div>
+
+    {%- endif -%}
+
+{%- endif -%}

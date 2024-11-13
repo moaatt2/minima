@@ -1,7 +1,18 @@
 ---
 layout: base_wide
 ---
+{%- comment -%}
 
+This layout creates a responsive grid of gallery cards for each post with a link to a folder containing at least 1 displayable image. 
+Each gallery card contains a carousel with dots denoting the active image as well as the post release date, title(as a link) and the tags of the post.
+
+Special Front Matter Variables:
+    show_tutorial: Whether or not to include pictures with the text `_tutorial_` in the gallery. The default behaviour is to not do so.
+    show_progress: Whether or not to include pictures with the text `_step_` in the gallery. The default behaviour is to not do so.
+
+Requreiments:
+    * Posts need to have an `image_path` front matter variable defined to be included.
+{%- endcomment -%}
 
 <!-- Set dateformat for use in gallery info -->
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}

@@ -1,0 +1,152 @@
+---
+layout: base_wide
+---
+{%- comment -%}
+
+This layout creates a responsive grid of gallery cards for each post with a link to a folder containing at least 1 displayable image. 
+Each gallery card contains a carousel with dots denoting the active image as well as the post release date, title(as a link) and the tags of the post.
+
+Special Front Matter Variables:
+    show_tutorial: Whether or not to include pictures with the text `_tutorial_` in the gallery. The default behaviour is to not do so.
+    show_progress: Whether or not to include pictures with the text `_step_` in the gallery. The default behaviour is to not do so.
+
+Requreiments:
+    * Posts need to have an `image_path` front matter variable defined to be included.
+{%- endcomment -%}
+
+<!-- Set dateformat for use in gallery info -->
+{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+
+
+<!-- Set default null behaviour for show_progress and show_tutorial -->
+{%- assign show_progress = false -%}
+{%- if page.show_progress -%}
+    {%- assign show_progress = page.show_progress -%}
+{%- endif -%}
+
+{%- assign show_tutorial = false -%}
+{%- if page.show_tutorial -%}
+    {%- assign show_tutorial = page.show_tutorial -%}
+{%- endif -%}
+
+
+<div class="gallery">
+    {%- for post in site.posts -%}
+        {%- include gallery_card.html -%}
+    {%- endfor -%}
+</div>
+
+
+<script>
+    // Wait for the page to load and remove the lock on animations
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            let wrappers = document.getElementsByClassName("prevent-animation");
+            Array.from(wrappers).forEach(element => {
+                element.classList.remove("prevent-animation");
+            });
+        }, 1000);
+    });
+
+    // Slide change function
+    function changeSlide(wrapperId, direction) {
+
+        // Get the appropriate wrapper and slides
+        let container = document.getElementById(wrapperId);
+        let wrapper = container.getElementsByClassName('carousel-wrapper')[0];
+        let slides = wrapper.getElementsByClassName('carousel-slide');
+        let totalSlides = slides.length;
+
+        // Get Dots and make all inactive
+        let dots = document.getElementById(`${wrapperId}-dots`).getElementsByTagName("span");
+        Array.from(dots).forEach(element => {
+            element.classList.remove("dot-active")
+        });
+
+        // Disable buttons
+        let nextButton = container.getElementsByClassName("carousel-next")[0];
+        let lastButton = container.getElementsByClassName("carousel-last")[0];
+        lastButton.setAttribute("onclick", "");
+        nextButton.setAttribute("onclick", "");
+
+        // Find current index
+        let transform = wrapper.style.transform;
+        let transformPercentage = transform.split("(")[1].split("%")[0];
+        let currentIndex = Number(transformPercentage)/-100;
+
+        // Increment or decrement index based on direction
+        if (direction === 'next') {
+            currentIndex++;
+        } else {
+            currentIndex--;
+        }
+
+        // Make appropriate dot active
+        if (currentIndex === totalSlides - 1) {
+            dots[0].classList.add('dot-active');
+        } else if (currentIndex === 0) {
+            dots[dots.length-1].classList.add('dot-active');
+        } else {
+            dots[currentIndex-1].classList.add('dot-active');
+        }
+
+        // Smooth slide transition
+        wrapper.style.transition = 'transform 0.5s ease';
+        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Wraparound logic with a delay to reset without transition
+        wrapper.addEventListener('transitionend', () => {
+            if (currentIndex === totalSlides - 1) {
+                currentIndex = 1;
+                wrapper.style.transition = 'none';
+                wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+            if (currentIndex === 0) {
+                currentIndex = totalSlides - 2;
+                wrapper.style.transition = 'none';
+                wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+
+            // enable buttons after animation finishes
+            lastButton.setAttribute("onclick", `changeSlide('${wrapperId}', 'last')`);
+            nextButton.setAttribute("onclick", `changeSlide('${wrapperId}', 'next')`);
+        }, { once: true });
+    }
+
+    // Slide change function
+    function setSlide(wrapperId, slideNumber) {
+
+        // Get the appropriate wrapper and slides
+        let container = document.getElementById(wrapperId);
+        let wrapper = container.getElementsByClassName('carousel-wrapper')[0];
+
+        // Disable buttons
+        let nextButton = container.getElementsByClassName("carousel-next")[0];
+        let lastButton = container.getElementsByClassName("carousel-last")[0];
+        lastButton.setAttribute("onclick", "");
+        nextButton.setAttribute("onclick", "");
+
+        // Get Dots and make all inactive
+        let dots = document.getElementById(`${wrapperId}-dots`).getElementsByTagName("span");
+        Array.from(dots).forEach(element => {
+            element.classList.remove("dot-active")
+        });
+
+        // Find current index
+        let currentIndex = slideNumber;
+
+        // Mark current slide's dot active
+        dots[slideNumber - 1].classList.add('dot-active');
+
+        // Smooth slide transition
+        wrapper.style.transition = 'transform 0.5s ease';
+        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Enable 
+        wrapper.addEventListener('transitionend', () => {
+            // enable buttons after animation finishes
+            lastButton.setAttribute("onclick", `changeSlide('${wrapperId}', 'last')`);
+            nextButton.setAttribute("onclick", `changeSlide('${wrapperId}', 'next')`);
+        }, { once: true });
+    }
+</script>

@@ -77,17 +77,16 @@
             <!-- Gallery Info -->
             <div class="gallery-info">
                 <span class="post-meta" style="vertical-align: middle;">{{ post.date | date: date_format }}</span>
-                {%- if post.tags.first and site.tag_page -%}
-                    &nbsp;|
-                    {%- for tag in post.tags -%}
-                        &nbsp;<a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.tag_page }}#{{ tag }}">{{ tag }}</a>
-                    {%- endfor -%}
-                {%- endif -%}
                 <h3>
                     <a class="post-link" href="{{ post.url | relative_url }}">
                         {{ post.title | escape }}
                     </a>
                 </h3>
+                {%- if post.tags.first and site.tag_page -%}
+                    {%- for tag in post.tags -%}
+                        <a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.tag_page }}#{{ tag }}">{{ tag }}</a>&nbsp;
+                    {%- endfor -%}
+                {%- endif -%}
             </div>
         </div>
 

@@ -11,19 +11,17 @@
 
         <div class="flex-item">
             <span class="post-meta" style="vertical-align: middle;">{{ include.post.date | date: date_format }}</span>
-            {%- comment -%}<!-- Add Tags if applicable -->{%- endcomment -%}
-            {%- if include.post.tags.first and site.tag_page -%}
-                &nbsp;|
-                {%- for tag in include.post.tags -%}
-                    &nbsp;<a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.tag_page }}#{{ tag }}">{{ tag }}</a>
-                {%- endfor -%}
-            {%- endif -%}
-
             <h3>
                 <a class="post-link" href="{{ include.post.url | relative_url }}">
                     {{ include.post.title | escape }}
                 </a>
             </h3>
+            {%- comment -%}<!-- Add Tags if applicable -->{%- endcomment -%}
+            {%- if include.post.tags.first and site.tag_page -%}
+                {%- for tag in include.post.tags -%}
+                    <a class="article_tag article_list_tag" href="{{ site.baseurl }}{{ site.tag_page }}#{{ tag }}">{{ tag }}</a>&nbsp;
+                {%- endfor -%}
+            {%- endif -%}
             {%- if site.show_excerpts -%}
                 {{ include.post.excerpt }}
             {%- endif -%}

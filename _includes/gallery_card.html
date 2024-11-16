@@ -43,21 +43,21 @@
                 <div class="carousel-wrapper prevent-animation" style="transform: translateX(-100%);">
 
                     <!-- Cloned Last Slide -->
-                    <div class="carousel-slide"><img src="{{ last_image }}"></div>
+                    <div class="carousel-slide"><img src="{{ site.baseurl }}{{ last_image }}"></div>
 
                     <!-- Slides -->
                     {%- for file in site.static_files -%}
                         {%- if file.path contains post.image_path -%}
                             {%- unless file.path contains '_step_' and show_progress == false -%}
                                 {%- unless file.path contains '_tutorial_' and show_tutorial == false -%}
-                                    <div class="carousel-slide"><img src="{{ file.path }}"></div>
+                                    <div class="carousel-slide"><img src="{{ site.baseurl }}{{ file.path }}"></div>
                                 {%- endunless -%}
                             {%- endunless -%}
                         {%- endif -%}
                     {%- endfor -%}
 
                     <!-- Cloned First Slide -->
-                    <div class="carousel-slide"><img src="{{ first_image }}"></div>
+                    <div class="carousel-slide"><img src="{{ site.baseurl }}{{ first_image }}"></div>
                 </div>
 
                 <!-- Nav Buttons -->

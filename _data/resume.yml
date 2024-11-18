@@ -1,0 +1,59 @@
+professional_overview:
+  - Possess strong technical skills with a proven ability to learn quickly.
+  - Demonstrated record of bringing transformational improvement to optimize systems both technological and operational.
+  - Deeply motivated to continuously learn and apply gained knowledge to drive professional growth.
+
+technical_skills:
+  solution_stack:
+    - MySQL
+    - Redshift
+    - Postgres
+    - Looker/LookML
+    - Cube
+    - Superset
+    - Python (Pandas, Numpy, Selenium, Requests)
+    - Airflow
+    - Google Apps Script
+  software_tools:
+    - VS Code
+    - Pycharm
+    - DataGrip
+    - Hex
+    - Jupyter
+    - Google Workspace
+    - Microsoft Office
+    - Git
+    - JIRA
+    - Confluence
+    - Ubuntu
+    - Bash
+
+education:
+  - institution: "McMaster University"
+    location: "Hamilton, ON"
+    degree: 'B.Sc. Mathematics'
+    time: '2014 - 2019'
+    points:
+      - "Specialization: Actuarial And Financial Mathematics"
+      - "Minor: Computer Science"
+
+experience:
+  - company: GiftCash
+    location: "Hamilton, ON"
+    title: 'Full Stack Data Scientist'
+    time: '2019 - Present'
+    points:
+      - Built and managed ETL systems on AWS EC2, cron, Astronomer-hosted Airflow, and AWS S3 making centralized analytics possible.
+      - Led complete overhaul of our legacy Looker code-base, improving performance through implementation of OLAP best practices and implementation of modular design.
+      - Lead a transition from Looker to Cube and Superset, identifying and evaluating potential alternatives, constructing a live demo, defining our workflow, orchestrating re-implementation and enhancements of all pre-existing systems and tools. This project was executed in three months, eliminated license costs, and increased capabilities.
+      - Employed web scraping techniques, including parallel processing via proxies, to systematically extract publicly available data from diverse sources.
+      - Modeled intricate business processes, collaborated with stakeholders, parsed raw data, and deployed metrics.
+
+  - company: GiftCash
+    location: "Hamilton, ON"
+    title: 'Sourcing Intern'
+    time: '2018'
+    points:
+      - Developed and deployed custom interface for streamlined data entry and decision-making.
+      - Established workflows and data management structure that enabled GiftCash to grow from 7 employees to 25 employees in 8 months, tripling revenue.
+      - Spearheaded the integration of data analytics tools, optimizing insights generation and supporting data-driven decision-making processes across the organization.

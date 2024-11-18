@@ -1,0 +1,12 @@
+.resume-grid {
+    display: grid;
+    grid-template-columns: fit-content(60ch) auto;
+}
+
+.resume-grid-item {
+    padding-left: 10px;
+}
+
+.resume-grid-right {
+    text-align: right;
+}

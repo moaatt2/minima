@@ -16,7 +16,7 @@ layout: base
         <ul class="post-list">
             {%- for post in posts -%}
                 {%- if post.type == page.target_type -%}
-                    <span class="post-meta">{{ post.date | date: date_format }}</span>
+                    <span class="post-meta">{{ post.date | date: date_format }}{%- if post.status -%} | {{ post.status }}{%- endif -%} </span>
                     <h3>
                         <a class="post-link" href="{{ post.url | relative_url }}">
                             {{ post.title | escape }}

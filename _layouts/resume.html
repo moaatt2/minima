@@ -1,0 +1,126 @@
+---
+layout: base
+---
+
+<article class="post">
+    <div class="post-content">
+
+        {{ content }}
+
+        <!-- Professional Overview -->
+        {% if site.data.resume contains "professional_overview" %}
+            <!-- Header -->
+            <h2>Professional Overview</h2>
+            <hr>
+
+            <!-- Points -->
+            <ul>
+                {%- for point in site.data.resume.professional_overview -%}
+                    <li>{{ point }}</li>
+                {%- endfor -%}
+            </ul>
+        {% endif %}
+
+        <!-- Technical Skills -->
+        {% if site.data.resume contains "technical_skills" %}
+
+            <!-- Header -->
+            <h2>Technical Skills</h2>
+            <hr>
+
+            <div class="resume-grid">
+                {% if site.data.resume.technical_skills contains "solution_stack" %}
+                    <div>
+                        <b>Solution Stack:</b>
+                    </div>
+                    <div class="resume-grid-item">
+                        {% for tool in site.data.resume.technical_skills.solution_stack %}
+                            {{ tool }}{% unless forloop.last %}, {% endunless %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if site.data.resume.technical_skills contains "software_tools" %}
+                    <div>
+                        <b>Software/Tools:</b>
+                    </div>
+                    <div class="resume-grid-item">
+                        {% for tool in site.data.resume.technical_skills.software_tools %}
+                            {{ tool }}{% unless forloop.last %}, {% endunless %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+        {% endif %}
+
+        <!-- Eduation -->
+        {% if site.data.resume contains "education" %}
+
+            <!-- Header -->
+            <h2>Education</h2>
+            <hr>
+            
+            <!-- Loop Through Education Entries -->
+            {% for item in site.data.resume.education %}
+                <!-- Top Info -->
+                <div class="resume-grid">
+                    <div>
+                        <b>{{ item.institution }}</b>, {{ item.location }}
+                    </div>
+                    <div class="resume-grid-item resume-grid-right">
+                        {{ item.time }}
+                    </div>
+                </div>
+
+                <i>{{ item.degree }}</i>
+
+                <!-- Education Points -->
+                {% if item.points.size > 0 %}
+                    <br>
+                    <ul>
+                        {% for point in item.points %}
+                        <li>{{ point }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+
+        {% endif %}
+
+        <!-- Experience -->
+        {% if site.data.resume contains "experience" %}
+
+            <!-- Header -->
+            <h2>Experience</h2>
+            <hr>
+            
+            <!-- Loop Through Education Entries -->
+            {% for item in site.data.resume.experience %}
+                <!-- Top Info -->
+                <div class="resume-grid">
+                    <div>
+                        <b>{{ item.company }}</b>, {{ item.location }}
+                    </div>
+                    <div class="resume-grid-item resume-grid-right">
+                        {{ item.time }}
+                    </div>
+                </div>
+
+                <i>{{ item.title }}</i>
+
+                <!-- Points -->
+                {% if item.points.size > 0 %}
+                    <br>
+                    <ul>
+                        {% for point in item.points %}
+                        <li>{{ point }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+
+        {% endif %}
+
+    </div>
+</article>

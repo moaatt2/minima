@@ -1,7 +1,7 @@
 ---
 layout: list_families
 title: Posts by Family
-permalink: /families
+permalink: /families/
 show_single: yes
 glossary: single_only
 ---

@@ -1,6 +1,12 @@
 {% assign entry = include.item %}
+{%- assign first_char = entry.user_url | slice:0 -%}
+{%- if first_char == "/" -%}
+    {%- assign url = site.baseurl | append: entry.user_url -%}
+{%- else -%}
+    {%- assign url = entry.user_url -%}
+{%- endif -%}
 <li>
-    <a rel="me" href="{{ entry.user_url }}" target="_blank" title="{{ entry.title | default: entry.platform }}">
+    <a rel="me" href="{{ url }}" target="_blank" title="{{ entry.title | default: entry.platform }}">
     <svg class="svg-icon">
         <use xlink:href="{{ '/assets/minima-social-icons.svg#' | append: entry.platform | relative_url }}"></use>
     </svg>

@@ -37,6 +37,9 @@ header_pages:
 # Set to `true` to show excerpts on the homepage.
 #show_excerpts: false
 
+# Set a baseurl for publishing to github -  Default to the name of the repository.
+# baseurl: "/minima"
+
 # If you have a favicon(tab icon) set the filepath for it below
 favicon: /assets/images/icon.png
 
@@ -69,6 +72,9 @@ minima:
     - platform: rss
       user_url: "/feed.xml"
       user_title: "RSS Feed"
+    
+    - platform: rss
+      user_url: "/feed.xml"
 
 # Create tippy abbreviations to use throughout the website
 abbreviations:

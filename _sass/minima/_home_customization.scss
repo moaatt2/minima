@@ -2,6 +2,7 @@
 div.picture-box {
     width: 20%;
     padding-right: 2.5%;
+    flex-shrink: 0;
 }
 
 div.picture-box a {

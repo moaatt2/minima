@@ -5,6 +5,12 @@ div.picture-box {
     flex-shrink: 0;
 }
 
+@media (max-width: 600px) {
+    div.picture-box {
+        width: 30%;
+    }
+}
+
 div.picture-box a {
     height: 100%;
     width: 100%;

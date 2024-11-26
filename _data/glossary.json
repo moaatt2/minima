@@ -36,6 +36,10 @@
         "text": "The Inner Diameter(ID) of a ring is the diameter of the circle formed by the inside edge of a ring.",
         "glossary_page_show": true
     },
+    "Family": {
+        "text": "Weave families are groups of weaves with a set defining characteristics they all share.",
+        "glossary_page_show": true
+    },
     "wire_diameter": {
         "text": "The Wire Diameter(WD) of a ring is the distance from the inner edge of the ring to the closest point on the outer edge of the ring.",
         "glossary_page_show": true

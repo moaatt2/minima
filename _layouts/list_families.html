@@ -18,8 +18,11 @@ layout: base
 <!-- Split the string into an array, then de-duplicate and sort it -->
 {% assign weave_families = weave_families | split: ", " | uniq | sort %}
 
+<h1>{{ page.title }}</h1>
 
+{{ content }}
 
+<h2>Families</h2>
 
 <div class="tags">
     {% for family in weave_families %}
@@ -27,6 +30,7 @@ layout: base
     {% endfor %}
 </div>
 
+<h2>Family Lists:</h2>
 
 {% for family in weave_families %}
 

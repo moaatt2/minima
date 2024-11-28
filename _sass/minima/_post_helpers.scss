@@ -6,6 +6,14 @@
     display: block;
 }
 
+// Center only for mobile devices
+@media (max-width: 600px) {
+    .post-center-image-mobile-only {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+}
 
 // Default for process images - uses max-height to avoid crushing images
 .post-process-image-150 {

@@ -15,6 +15,12 @@
     }
 }
 
+// Ensure all images can fit on screen.
+.post img {
+    max-height: 90vh;
+    width: auto;
+}
+
 // Default for process images - uses max-height to avoid crushing images
 .post-process-image-150 {
     max-height: 150px;
@@ -23,9 +29,3 @@
 .post-tutorial-image-300 {
     max-height: 300px;
 }
-
-// // TODO - Ensure all images can fit on screen.
-// .post img {
-//     max-height: 90vh;
-//     width: auto;
-// }

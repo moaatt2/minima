@@ -21,7 +21,7 @@
     width: auto;
 }
 
-// Default for process images - uses max-height to avoid crushing images
+// When setting a height is desired, use max height to ensure the aspect ratio is maintained.
 .post-process-image-150 {
     max-height: 150px;
 }

@@ -22,10 +22,10 @@
 }
 
 // When setting a height is desired, use max height to ensure the aspect ratio is maintained.
-.post-process-image-150 {
-    max-height: 150px;
+.post img.post-process-image-150 {
+    max-height: min(150px, 90vh);
 }
 
-.post-tutorial-image-300 {
-    max-height: 300px;
+.post img.post-tutorial-image-300 {
+    max-height: min(150px, 90vh);
 }

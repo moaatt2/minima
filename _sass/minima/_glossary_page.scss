@@ -8,6 +8,11 @@ div.glossary-image {
     margin-right: 1.5rem;
     flex-shrink: 0;
 
+    @media (max-width: 600px) {
+        width: 30%;
+        margin-right: 1rem;
+    }
+
     // Ensure that the figure caption does not go past the image
     figure {
         display: table;

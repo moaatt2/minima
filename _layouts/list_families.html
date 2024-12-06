@@ -18,15 +18,23 @@ layout: base
 <!-- Split the string into an array, then de-duplicate and sort it -->
 {% assign weave_families = weave_families | split: ", " | uniq | sort %}
 
+<!-- Main Title -->
+<h1>{{ page.title }}</h1>
 
+<!-- Content, Subtitles and -->
+<div id="hide-for-solo">
+    {{ content }}
 
+    <h2>Families</h2>
 
-<div class="tags">
-    {% for family in weave_families %}
-        <a href="#{{ family }}"> {{ family }} </a>
-    {% endfor %}
+    <div class="tags">
+        {% for family in weave_families %}
+            <a href="#{{ family }}"> {{ family }} </a>
+        {% endfor %}
+    </div>
+
+    <h2>Family Lists</h2>
 </div>
-
 
 {% for family in weave_families %}
 
@@ -90,6 +98,9 @@ layout: base
                 family = url_parts[1];
                 document.querySelector('div#'+family+'-container').style.display = 'block';
                 console.log('Unhid desired family container');
+
+                // Hide top portions of page in single definition mode
+                document.getElementById("hide-for-solo").style.display = 'none';
 
                 // Exiting case
                 break;

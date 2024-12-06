@@ -1,8 +1,24 @@
 
 div.picture-box {
-    height: 20%; 
     width: 20%;
-    padding-right: 1.5rem;
+    padding-right: 2.5%;
+    flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+    div.picture-box {
+        width: 30%;
+    }
+}
+
+div.picture-box a {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+div.picture-box img {
+    object-fit: contain;
 }
 
 div.post-container {

@@ -1,6 +1,6 @@
 ---
 layout: type_filter
-permalink: /projects/
 title: ???
+permalink: /projects/
 target_type: project
 ---

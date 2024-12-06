@@ -1,7 +1,7 @@
 title: Your awesome title
 author:
-  name: GitHub User
-  email: your-email@domain.com
+  name: Dakota McKay
+  email: test@test.ccom
 
 # The `>` after `description:` means to ignore line-breaks until next key.
 # If you want to omit the line-break after the end of text, use `>-` instead.
@@ -29,13 +29,16 @@ plugins:
 # If you want to link only specific pages in your header, use this and add the path to the pages
 # in order as they should show up.
 header_pages:
-  - about.md
-  - contact.md
-  - list_families.md
-  - list_tags.md
+  - pages/about.md
+  - pages/contact.md
+  - pages/list_families.md
+  - pages/list_tags.md
 
 # Set to `true` to show excerpts on the homepage.
 #show_excerpts: false
+
+# Set a baseurl for publishing to github -  Default to the name of the repository.
+# baseurl: "/minima"
 
 # If you have a favicon(tab icon) set the filepath for it below
 favicon: /assets/images/icon.png
@@ -69,6 +72,9 @@ minima:
     - platform: rss
       user_url: "/feed.xml"
       user_title: "RSS Feed"
+    
+    - platform: rss
+      user_url: "/feed.xml"
 
 # Create tippy abbreviations to use throughout the website
 abbreviations:

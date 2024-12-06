@@ -1,0 +1,31 @@
+
+// Image centering shortcut
+.post-center-image {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+// Center only for mobile devices
+@media (max-width: 600px) {
+    .post-center-image-mobile-only {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+}
+
+// Ensure all images can fit on screen.
+.post img {
+    max-height: 90vh;
+    width: auto;
+}
+
+// When setting a height is desired, use max height to ensure the aspect ratio is maintained.
+.post img.post-process-image-150 {
+    max-height: min(150px, 90vh);
+}
+
+.post img.post-tutorial-image-300 {
+    max-height: min(150px, 90vh);
+}

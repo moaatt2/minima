@@ -1,6 +1,8 @@
 
 $primaryDark: #469dff;
 $accentDark:  #181818;
+$tagTitle: #C0C0C0; // Other options are a6a6a6(darker, text color) or d9d9d9(perhaps a bit too light)
+
 
 .article_tag {
 
@@ -67,7 +69,7 @@ $accentDark:  #181818;
             padding: 3px 10px;
             border-radius: 5px;
             color: $accentDark;
-            background-color: $primaryDark;
+            background-color: $tagTitle;
         }
     }
 

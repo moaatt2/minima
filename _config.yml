@@ -40,6 +40,9 @@ header_pages:
 # Set a baseurl for publishing to github -  Default to the name of the repository.
 # baseurl: "/minima"
 
+feed:
+  icon: /assets/images/icon.png
+
 # If you have a favicon(tab icon) set the filepath for it below
 favicon: /assets/images/icon.png
 

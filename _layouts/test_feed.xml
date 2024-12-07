@@ -4,10 +4,13 @@
     <link href="http://0.0.0.0:4000/" rel="alternate" type="text/html"/>
     <updated>2024-12-07T09:37:21-05:00</updated>
     <id>http://0.0.0.0:4000/feed.xml</id>
-    <title type="html">Your awesome title</title>
-    <subtitle>
-        Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-    </subtitle> -->
+    <title type="html">Your awesome title</title> -->
+
+    {% if site.description %}
+        <subtitle>
+            {{ site.description }}
+        </subtitle>
+    {% endif %}
 
     {% if site.author %}
         <author>

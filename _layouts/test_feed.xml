@@ -7,9 +7,16 @@
     <title type="html">Your awesome title</title>
     <subtitle>
         Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-    </subtitle>
-    <author>
-        <name>Dakota McKay</name>
-        <email>test@test.ccom</email>
-    </author> -->
+    </subtitle> -->
+
+    {% if site.author %}
+        <author>
+            {%- if site.author.name -%}
+                <name>{{ site.author.name }}</name>
+            {%- endif -%}
+            {%- if site.author.email -%}
+                <email>{{ site.author.email }}</email>
+            {%- endif -%}
+        </author>
+    {% endif %}
 </feed>

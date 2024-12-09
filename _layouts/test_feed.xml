@@ -1,5 +1,5 @@
 <feed>
-    <!-- <generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator> -->
+    <generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator>
 
     <link href="{{ site.url }}{{ site.baseurl }}{{ page.url }}" rel="self" type="application/atom+xml"/>
 

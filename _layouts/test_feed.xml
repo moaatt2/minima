@@ -41,6 +41,17 @@
     {% for post in site.posts limit:post_limit %}
         <entry>
             <title type="html">{{ post.title }}</title>
+            
+            {% if site.author %}
+                <author>
+                    {%- if site.author.name -%}
+                        <name>{{ site.author.name }}</name>
+                    {%- endif -%}
+                    {%- if site.author.email -%}
+                        <email>{{ site.author.email }}</email>
+                    {%- endif -%}
+                </author>
+            {% endif %}
         </entry>
     {% endfor %}
 </feed>

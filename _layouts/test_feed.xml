@@ -44,6 +44,8 @@
 
             <link href="{{ site.url }}{{ site.baseurl }}{{ post.url }}" rel="alternate" type="text/html" title="{{ post.title }}" />
 
+            <published> {{ post.date | date: "%Y-%m-%dT%T%:z" }} </published>
+
             {% if site.author %}
                 <author>
                     {%- if site.author.name -%}

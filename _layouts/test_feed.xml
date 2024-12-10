@@ -46,6 +46,8 @@
 
             <published> {{ post.date | date: "%Y-%m-%dT%T%:z" }} </published>
 
+            <updated>{{ post.modified_date | default: post.date | date: "%Y-%m-%dT%T%:z" }}</updated>
+
             {% if site.author %}
                 <author>
                     {%- if site.author.name -%}

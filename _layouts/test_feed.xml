@@ -41,7 +41,9 @@
     {% for post in site.posts limit:post_limit %}
         <entry>
             <title type="html">{{ post.title }}</title>
-            
+
+            <link href="{{ site.url }}{{ site.baseurl }}{{ post.url }}" rel="alternate" type="text/html" title="{{ post.title }}" />
+
             {% if site.author %}
                 <author>
                     {%- if site.author.name -%}

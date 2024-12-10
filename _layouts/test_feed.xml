@@ -29,4 +29,10 @@
             {%- endif -%}
         </author>
     {% endif %}
+
+    {% for post in site.posts %}
+        <entry>
+            <title type="html">{{ post.title }}</title>
+        </entry>
+    {% endfor %}
 </feed>

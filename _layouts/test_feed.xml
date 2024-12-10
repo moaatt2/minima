@@ -30,7 +30,15 @@
         </author>
     {% endif %}
 
-    {% for post in site.posts %}
+
+    {% if site.feed.max_posts %}
+        {% assign post_limit = site.feed.max_posts %}
+    {% else %}
+        {% assign post_limit = site.posts | size %}
+    {% endif %}
+
+
+    {% for post in site.posts limit:post_limit %}
         <entry>
             <title type="html">{{ post.title }}</title>
         </entry>

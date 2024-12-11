@@ -65,6 +65,11 @@
                 <category term="{{ tag }}" />
             {%- endfor -%}
 
+            {%- if post.main_image and post.image_path -%}
+                <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ post.image_path }}{{ post.main_image }}" />
+                <media:content xmlns:media="http://search.yahoo.com/mrss/" medium="image" url="{{ post.image_path }}{{ post.main_image }}" />
+            {%- endif -%}
+
         </entry>
     {% endfor %}
 </feed>

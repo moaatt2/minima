@@ -65,6 +65,9 @@
                 <category term="{{ tag }}" />
             {%- endfor -%}
 
+            
+            <content type="html" xml:base="{{ site.url }}{{ site.baseurl }}{{ post.url }}"><![CDATA[{{ post.content | strip }}]]></content>
+
             {% assign width  = post.main_image_width%}
             {% assign height = post.main_image_height%}
             {%- if post.main_image and post.image_path -%}

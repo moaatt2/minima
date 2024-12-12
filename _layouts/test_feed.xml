@@ -1,13 +1,19 @@
 <feed>
     <generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator>
 
-    <link href="{{ site.url }}{{ site.baseurl }}{{ page.url }}" rel="self" type="application/atom+xml"/>
+    {% if site.feed.url %}
+        {% assign url = site.feed.url %}
+    {% else %}
+        {% assign url = site.url %}
+    {% endif %}
 
-    <link href="{{ site.url }}{{ site.baseurl }}" rel="alternate" type="text/html"/>
+    <link href="{{ url }}{{ site.baseurl }}{{ page.url }}" rel="self" type="application/atom+xml"/>
+
+    <link href="{{ url }}{{ site.baseurl }}" rel="alternate" type="text/html"/>
 
     <updated>{{ "now" | date: "%Y-%m-%dT%T%:z" }}</updated>
 
-    <id>{{ site.url }}{{ site.baseurl }}{{ page.url }}</id>
+    <id>{{ url }}{{ site.baseurl }}{{ page.url }}</id>
 
     {%- if site.title -%}
         <title>{{ site.title }}</title>
@@ -42,13 +48,13 @@
         <entry>
             <title type="html">{{ post.title }}</title>
 
-            <link href="{{ site.url }}{{ site.baseurl }}{{ post.url }}" rel="alternate" type="text/html" title="{{ post.title }}" />
+            <link href="{{ url }}{{ site.baseurl }}{{ post.url }}" rel="alternate" type="text/html" title="{{ post.title }}" />
 
             <published>{{ post.date | date: "%Y-%m-%dT%T%:z" }}</published>
 
             <updated>{{ post.modified_date | default: post.date | date: "%Y-%m-%dT%T%:z" }}</updated>
 
-            <id>{{ site.url }}{{ site.baseurl }}{{ post.url }}</id>
+            <id>{{ url }}{{ site.baseurl }}{{ post.url }}</id>
 
             {% if site.author %}
                 <author>
@@ -66,7 +72,7 @@
             {%- endfor -%}
 
             
-            <content type="html" xml:base="{{ site.url }}{{ site.baseurl }}{{ post.url }}"><![CDATA[{{ post.content | strip }}]]></content>
+            <content type="html" xml:base="{{ url }}{{ site.baseurl }}{{ post.url }}"><![CDATA[{{ post.content | strip }}]]></content>
 
             {% assign width  = post.main_image_width%}
             {% assign height = post.main_image_height%}

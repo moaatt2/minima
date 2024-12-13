@@ -20,7 +20,7 @@
     {% endif %}
 
     {% if site.feed.logo %}
-        <icon>{{ url }}{{ site.baseurl }}{{ site.feed.logo }}</icon>
+        <logo>{{ url }}{{ site.baseurl }}{{ site.feed.logo }}</logo>
     {% endif %}
 
     {%- if site.title -%}

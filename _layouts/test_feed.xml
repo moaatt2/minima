@@ -77,8 +77,8 @@
             {% assign width  = post.main_image_width%}
             {% assign height = post.main_image_height%}
             {%- if post.main_image and post.image_path -%}
-                <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ post.image_path }}{{ post.main_image }}"{%if width%} width="{{width}}"{%endif%}{%if height%} height="{{height}}"{%endif%} />
-                <media:content xmlns:media="http://search.yahoo.com/mrss/" medium="image" url="{{ post.image_path }}{{ post.main_image }}" />
+                <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ url }}{{ site.baseurl }}{{ post.image_path }}{{ post.main_image }}"{%if width%} width="{{width}}"{%endif%}{%if height%} height="{{height}}"{%endif%} />
+                <media:content xmlns:media="http://search.yahoo.com/mrss/" medium="image" url="{{ url }}{{ site.baseurl }}{{ post.image_path }}{{ post.main_image }}"{%if width%} width="{{width}}"{%endif%} />
             {%- endif -%}
 
         </entry>

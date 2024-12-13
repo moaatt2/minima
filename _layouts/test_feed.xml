@@ -15,6 +15,10 @@
 
     <id>{{ url }}{{ site.baseurl }}{{ page.url }}</id>
 
+    {% if site.feed.icon %}
+        <icon>{{ url }}{{ site.baseurl }}{{ site.feed.icon }}</icon>
+    {% endif %}
+
     {%- if site.title -%}
         <title>{{ site.title }}</title>
     {%- endif -%}

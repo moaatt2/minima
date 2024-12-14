@@ -1,4 +1,4 @@
-<feed xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
     <generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator>
 
     {% if site.feed.url %}
@@ -85,8 +85,8 @@
             {% assign width  = post.main_image_width%}
             {% assign height = post.main_image_height%}
             {%- if post.main_image and post.image_path -%}
-                <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ url }}{{ site.baseurl }}{{ post.image_path }}{{ post.main_image }}"{%if width%} width="{{width}}"{%endif%}{%if height%} height="{{height}}"{%endif%} />
-                <media:content xmlns:media="http://search.yahoo.com/mrss/" medium="image" url="{{ url }}{{ site.baseurl }}{{ post.image_path }}{{ post.main_image }}"{%if width%} width="{{width}}"{%endif%} />
+                <media:thumbnail url="{{ url }}{{ site.baseurl }}{{ post.image_path }}{{ post.main_image }}"{%if width%} width="{{width}}"{%endif%}{%if height%} height="{{height}}"{%endif%} />
+                <media:content medium="image" url="{{ url }}{{ site.baseurl }}{{ post.image_path }}{{ post.main_image }}"{%if width%} width="{{width}}"{%endif%} />
             {%- endif -%}
 
         </entry>

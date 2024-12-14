@@ -1,4 +1,4 @@
-<feed>
+<feed xmlns="http://www.w3.org/2005/Atom">
     <generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator>
 
     {% if site.feed.url %}

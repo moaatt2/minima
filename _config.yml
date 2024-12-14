@@ -20,6 +20,8 @@ description: >
 # add a line comment on "theme: minima" above.
 #remote_theme: jekyll/minima
 
+# baseurl: /minima # Set a base url for testing purposes
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
@@ -41,7 +43,9 @@ header_pages:
 # baseurl: "/minima"
 
 feed:
+  # url: 192.168.2.10 # override url for rss feed for local testing
   icon: /assets/images/icon.png
+  logo: /assets/images/logo.png
 
 # If you have a favicon(tab icon) set the filepath for it below
 favicon: /assets/images/icon.png

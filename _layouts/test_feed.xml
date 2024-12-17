@@ -8,7 +8,6 @@
     {% endif %}
 
     <link href="{{ url }}{{ site.baseurl }}{{ page.url }}" rel="self" type="application/atom+xml"/>
-    <!-- {{ page.url | absolute_url }} -->
 
     <link href="{{ url }}{{ site.baseurl }}" rel="alternate" type="text/html"/>
 

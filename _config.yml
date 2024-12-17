@@ -23,7 +23,7 @@ description: >
 # baseurl: /minima # Set a base url for testing purposes
 
 plugins:
-  - jekyll-feed
+  # - jekyll-feed
   - jekyll-seo-tag
 
 # Theme-specific settings

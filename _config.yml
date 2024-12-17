@@ -43,7 +43,8 @@ header_pages:
 # baseurl: "/minima"
 
 feed:
-  # url: 192.168.2.10 # override url for rss feed for local testing
+  url: 192.168.2.10 # override url for rss feed for local testing
+  path: /feed.xml
   icon: /assets/images/icon.png
   logo: /assets/images/logo.png
 

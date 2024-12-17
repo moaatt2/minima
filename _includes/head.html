@@ -1,17 +1,27 @@
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  {%- seo -%}
-  <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
-  {%- if site.favicon -%}
-    <link rel="shortcut icon" href="{{ site.baseurl }}{{ site.favicon }}" type="image/x-icon">
-  {%- endif -%}
-  {%- feed_meta -%}
-  {%- if jekyll.environment == 'production' and site.google_analytics -%}
-    {%- include google-analytics.html -%}
-  {%- endif -%}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {%- seo -%}
+    <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
 
-  {%- include custom-head.html -%}
+    {%- if site.favicon -%}
+        <link rel="shortcut icon" href="{{ site.baseurl }}{{ site.favicon }}" type="image/x-icon">
+    {%- endif -%}
   
+    {%- if site.feed.path -%}
+        {% if site.feed.url %}
+            {% assign url = site.feed.url %}
+        {% else %}
+            {% assign url = site.url %}
+        {% endif %}
+        <link type="application/atom+xml" rel="alternate" href="{{ url }}{{ site.baseurl }}{{ site.feed.path }}" title="{{ site.title }}">
+    {%- endif -%}
+
+    {%- if jekyll.environment == 'production' and site.google_analytics -%}
+        {%- include google-analytics.html -%}
+    {%- endif -%}
+
+    {%- include custom-head.html -%}
+
 </head>

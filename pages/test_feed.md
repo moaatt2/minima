@@ -1,4 +1,4 @@
 ---
-layout: test_feed
+layout: rss_feed
 permalink: /feed.xml
 ---

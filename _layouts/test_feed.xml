@@ -1,5 +1,5 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
-    <generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator>
+    <generator uri="https://jekyllrb.com/" version="{{ jekyll.version }}">Jekyll</generator>
 
     {% if site.feed.url %}
         {% assign url = site.feed.url %}

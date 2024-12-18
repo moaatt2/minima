@@ -1,0 +1,94 @@
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+    <generator uri="https://jekyllrb.com/" version="{{ jekyll.version }}">Jekyll</generator>
+
+    {% if site.feed.url %}
+        {% assign url = site.feed.url %}
+    {% else %}
+        {% assign url = site.url %}
+    {% endif %}
+
+    <link href="{{ url }}{{ site.baseurl }}{{ page.url }}" rel="self" type="application/atom+xml"/>
+
+    <link href="{{ url }}{{ site.baseurl }}" rel="alternate" type="text/html"/>
+
+    <updated>{{ "now" | date: "%Y-%m-%dT%T%:z" }}</updated>
+
+    <id>{{ url }}{{ site.baseurl }}{{ page.url }}</id>
+
+    {% if site.feed.icon %}
+        <icon>{{ url }}{{ site.baseurl }}{{ site.feed.icon }}</icon>
+    {% endif %}
+
+    {% if site.feed.logo %}
+        <logo>{{ url }}{{ site.baseurl }}{{ site.feed.logo }}</logo>
+    {% endif %}
+
+    {%- if site.title -%}
+        <title>{{ site.title }}</title>
+    {%- endif -%}
+
+    {% if site.description %}
+        <subtitle>
+            {{ site.description }}
+        </subtitle>
+    {% endif %}
+
+    {% if site.author %}
+        <author>
+            {%- if site.author.name -%}
+                <name>{{ site.author.name }}</name>
+            {%- endif -%}
+            {%- if site.author.email -%}
+                <email>{{ site.author.email }}</email>
+            {%- endif -%}
+        </author>
+    {% endif %}
+
+
+    {% if site.feed.max_posts %}
+        {% assign post_limit = site.feed.max_posts %}
+    {% else %}
+        {% assign post_limit = site.posts | size %}
+    {% endif %}
+
+
+    {% for post in site.posts limit:post_limit %}
+        <entry>
+            <title type="html">{{ post.title }}</title>
+
+            <link href="{{ url }}{{ site.baseurl }}{{ post.url }}" rel="alternate" type="text/html" title="{{ post.title }}" />
+
+            <published>{{ post.date | date: "%Y-%m-%dT%T%:z" }}</published>
+
+            <updated>{{ post.modified_date | default: post.date | date: "%Y-%m-%dT%T%:z" }}</updated>
+
+            <id>{{ url }}{{ site.baseurl }}{{ post.url }}</id>
+
+            {% if site.author %}
+                <author>
+                    {%- if site.author.name -%}
+                        <name>{{ site.author.name }}</name>
+                    {%- endif -%}
+                    {%- if site.author.email -%}
+                        <email>{{ site.author.email }}</email>
+                    {%- endif -%}
+                </author>
+            {% endif %}
+
+            {%- for tag in post.tags -%}
+                <category term="{{ tag }}" />
+            {%- endfor -%}
+
+            
+            <content type="html" xml:base="{{ url }}{{ site.baseurl }}{{ post.url }}"><![CDATA[{{ post.content | strip }}]]></content>
+
+            {% assign width  = post.main_image_width%}
+            {% assign height = post.main_image_height%}
+            {%- if post.main_image and post.image_path -%}
+                <media:thumbnail url="{{ url }}{{ site.baseurl }}{{ post.image_path }}{{ post.main_image }}"{%if width%} width="{{width}}"{%endif%}{%if height%} height="{{height}}"{%endif%} />
+                <media:content medium="image" url="{{ url }}{{ site.baseurl }}{{ post.image_path }}{{ post.main_image }}"{%if width%} width="{{width}}"{%endif%} />
+            {%- endif -%}
+
+        </entry>
+    {% endfor %}
+</feed>

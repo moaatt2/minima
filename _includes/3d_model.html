@@ -27,7 +27,9 @@
 
     function main() {
         const canvas = document.getElementById("c");
-        const renderer = new THREE.WebGLRenderer({antialias: true, canvas});
+        const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true, canvas});
+        renderer.setClearColor(0x000000, 0); // Clear background
+        // renderer.setClearColor(0x000000); // Black Background
 
         const fov = 45;
         const aspect = 2;
@@ -40,7 +42,6 @@
         controls.rotateSpeed = 2.0
 
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x181818);
 
         const hlight = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFF, 2);
         scene.add(hlight);

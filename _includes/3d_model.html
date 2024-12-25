@@ -17,6 +17,12 @@
 {% endif %}
 
 
+{% comment %}
+    Allow user to remove style and import script if there is already 3d model on the page.
+{% endcomment %}
+{% if include.is_secondary %}
+<!-- Don't include duplicate style and import script -->
+{% else %}
 <!-- Make Canvas full Sized -->
 <style>
     canvas.model_canvas {
@@ -33,6 +39,7 @@
       }
     }
 </script>
+{% endif %}
 
 <!-- Load and create viewer for model -->
 <script type="module">

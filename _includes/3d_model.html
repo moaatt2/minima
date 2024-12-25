@@ -5,8 +5,17 @@
     {% assign canvas_id = "c" %}
 {% endif %}
 
+
+{% comment %}
+    Allow user to specify where canvas goes manually and just include the code needed to get canvas working
+{% endcomment %}
+{% if include.ignore_canvas %}
+<!-- Don't include a secondary canvas -->
+{% else %}
 <!-- Canvas Element to contain model -->
 <canvas class="model_canvas" id="{{ canvas_id }}"></canvas>
+{% endif %}
+
 
 <!-- Make Canvas full Sized -->
 <style>

@@ -1,10 +1,16 @@
 
+{% if include.canvas_id %}
+    {% assign canvas_id = include.canvas_id %}
+{% else %}
+    {% assign canvas_id = "c" %}
+{% endif %}
+
 <!-- Canvas Element to contain model -->
-<canvas id="c"></canvas>
+<canvas class="model_canvas" id="{{ canvas_id }}"></canvas>
 
 <!-- Make Canvas full Sized -->
 <style>
-    canvas#c {
+    canvas.model_canvas {
         width: 100%;
     }
 </style>
@@ -26,7 +32,7 @@
     import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
     function main() {
-        const canvas = document.getElementById("c");
+        const canvas = document.getElementById("{{ canvas_id }}");
         const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true, canvas});
         renderer.setClearColor(0x000000, 0); // Clear background
         // renderer.setClearColor(0x000000); // Black Background

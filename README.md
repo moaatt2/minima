@@ -42,4 +42,17 @@ This layout generates an atom feed that is inteded to replace the jekyll-feed ad
 * **feed.logo:** You can specify a relative link to the image you want to be used as the logo in the feed if not specified no logo will be included.
 * **feed.path:** The relative path to the feed, this is used to create a link in the `head` of each page to enable automated discovery this link will not be generated if this is left blank.
 * **feed.url:** The host domain (without baseurl) of the website. This was included as I found that `site.url` doesn't work properly on github pages.
- 
+
+
+## Custom Includes
+
+### 3D Model
+
+The purpose of this include is to add a 3D model to a page with full mobile and desktop support for rotating, zooming and panning to give users a very nice interactive element.
+
+**Include Variables:**
+
+* **model:** The only required variable, this expects a path to the file for the mdoel you want to display (in `.glb`) format.
+* **canvas_id:** An optional variable that allows you to specify an id for the canvas to be used. This will be needed if you want to have more than 1 model on a page. This should be a string that is a valid name for html element's id value.
+* **ignore_canvas:** An optional variable that allows you not include a canvas in the output of the include snippet. You can use this if you want more control over where the canvas should go. Do not set this variable to include the canvas.
+* **is_secondary:** An optional variable that allows you to not include the javascript imports if you already have an includes that does on the page to avoid repeated imports. This should be used for the second/subsequent uses of the includes on a page. Do not set this variable to include the imports.

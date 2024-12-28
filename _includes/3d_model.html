@@ -21,18 +21,8 @@
     Allow user to remove style and import script if there is already 3d model on the page.
 {% endcomment %}
 {% if include.is_secondary %}
-<!-- Don't include duplicate style and import script -->
+<!-- Don't include duplicate import scripts -->
 {% else %}
-<!-- Make Canvas full Sized -->
-<style>
-    canvas.model_canvas {
-        width: 100%;
-    }
-    canvas.tutorial_canvas {
-        width: 50%
-    }
-</style>
-
 <!-- Import Necessary Modules -->
 <script type="importmap">
     {

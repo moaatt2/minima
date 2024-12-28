@@ -29,3 +29,12 @@
 .post img.post-tutorial-image-300 {
     max-height: min(150px, 90vh);
 }
+
+
+// Specify different canvas sizes.
+canvas.model_canvas {
+    width: 100%;
+}
+canvas.tutorial_canvas {
+    width: 50%
+}

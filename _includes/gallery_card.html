@@ -36,10 +36,11 @@
             {%- endif -%}
         {%- endfor -%}
 
+        {% assign title_cleaned = post.title | replace: "'", "" %}
 
         <div class="gallery-card">
             <!-- Gallery Carousel -->
-            <div class="carousel-container" id="{{post.title}}-carousel">
+            <div class="carousel-container" id="{{title_cleaned}}-carousel">
                 <div class="carousel-wrapper prevent-animation" style="transform: translateX(-100%);">
 
                     <!-- Cloned Last Slide -->
@@ -61,16 +62,16 @@
                 </div>
 
                 <!-- Nav Buttons -->
-                <a class="carousel-nav carousel-last" onclick="changeSlide('{{ post.title }}-carousel', 'last')">&#10094;</a>
-                <a class="carousel-nav carousel-next" onclick="changeSlide('{{ post.title }}-carousel', 'next')">&#10095;</a>
+                <a class="carousel-nav carousel-last" onclick="changeSlide('{{ title_cleaned }}-carousel', 'last')">&#10094;</a>
+                <a class="carousel-nav carousel-next" onclick="changeSlide('{{ title_cleaned }}-carousel', 'next')">&#10095;</a>
             </div>
             <!-- Gallery Dots -->
-            <div class="dot-container" style="text-align: center;" id="{{ post.title }}-carousel-dots">
+            <div class="dot-container" style="text-align: center;" id="{{ title_cleaned }}-carousel-dots">
                 {%- for i in (1..num_images) -%}
                     {%- if i == 1 -%}
-                        <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot dot-active"></span>
+                        <span onclick="setSlide('{{ title_cleaned }}-carousel', {{i}})" class="dot dot-active"></span>
                     {%- else -%}
-                        <span onclick="setSlide('{{ post.title }}-carousel', {{i}})" class="dot"></span>
+                        <span onclick="setSlide('{{ title_cleaned }}-carousel', {{i}})" class="dot"></span>
                     {%- endif -%}
                 {%- endfor -%}
             </div>

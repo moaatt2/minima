@@ -5,6 +5,16 @@ I have created this fork of the [minima](https://github.com/jekyll/minima) Jekyl
 
 # How To Use
 
+## Special Post Front Matter Variables
+
+* families: A yaml list of the weave familes a post is part of. This is primarily used by the [Family Page](#TODO) and is only applicable for posts representing specific chainmail weaves.
+* image_path: The relative path to the folder containing images for the post. I suggest using this in links to images in the post to allow you move the folder easily.
+* main_image: The name of the file in the folder from the `image_path` to use as the main image for the post in the [RSS Feed](#rss-feed), and as the thumbnail image in all places where posts are listed.
+* main_image_width: The width of the image to use for the `main_image` for the post in the [RSS Feed](#rss-feed).
+* main_image_height: The heighty of the image to use for the `main_image` for the post in the [RSS Feed](#rss-feed).
+* exclude_from_gallery: Set to any value if you wish to exclude this post from the [Gallery](#gallery).
+
+
 ## Custom Layouts
 
 ### Gallery

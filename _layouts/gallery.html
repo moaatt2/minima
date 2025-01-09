@@ -32,7 +32,9 @@ Requreiments:
 
 <div class="gallery">
     {%- for post in site.posts -%}
-        {%- include gallery_card.html -%}
+        {%- if post.exclude_from_gallery == nil -%}
+            {%- include gallery_card.html -%}
+        {%- endif -%}
     {%- endfor -%}
 </div>
 

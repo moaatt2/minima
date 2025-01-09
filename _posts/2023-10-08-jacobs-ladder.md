@@ -6,6 +6,7 @@ families: European
 image_path: "/assets/images/posts/2023_10_08_jacobs_ladder"
 main_image: "/jacobs_ladder_flat.jpg"
 tags: weave chain spiral
+exclude_from_gallery: True
 ---
 
 ### Overview
